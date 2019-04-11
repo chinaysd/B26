@@ -448,6 +448,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\bsp_lock.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\bsp_wdt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

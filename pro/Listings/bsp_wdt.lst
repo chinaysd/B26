@@ -1,0 +1,39 @@
+C51 COMPILER V9.59.0.0   BSP_WDT                                                           04/11/2019 19:21:23 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_WDT
+OBJECT MODULE PLACED IN .\Objects\bsp_wdt.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\bsp\bsp_wdt.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\user;..\Ti
+                    -meOut) DEBUG OBJECTEXTEND PRINT(.\Listings\bsp_wdt.lst) TABS(7) OBJECT(.\Objects\bsp_wdt.obj)
+
+line level    source
+
+   1          #include "bsp_wdt.h"
+   2          
+   3          
+   4          void Wdt_Init(void)
+   5          {
+   6   1             WDTCON |= 0X10;
+   7   1      }
+   8          
+   9          void Wdt_Feed(void)
+  10          {
+  11   1             WDTCON |= 0X10;
+  12   1      }
+  13          
+  14          
+  15          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      8    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

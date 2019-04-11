@@ -11,6 +11,7 @@
 ".\Objects\bsp_pwm.obj",
 ".\Objects\bsp_motro.obj",
 ".\Objects\bsp_lock.obj",
+".\Objects\bsp_wdt.obj",
 ".\Objects\TimeOut.obj" 
 TO ".\Objects\B26" 
 PRINT(".\Listings\B26.m51") RAMSIZE(256) 

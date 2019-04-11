@@ -10,6 +10,7 @@
 #include "bsp_pwm.h"
 #include "bsp_motro.h"
 #include "bsp_lock.h"
+#include "bsp_wdt.h"
 
 
 

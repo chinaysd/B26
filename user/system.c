@@ -14,11 +14,13 @@ void System_Init(void)
        Timer_Init();
 	Key_Init();
 	Key_Register(Key_Function);
+	Wdt_Init();
 	Uart_Init(2,9600);
 }
 
 void System_Handle(void)
 {
+	Wdt_Feed();
 	Key_Poll();
 	if(TimeOutDet_Check(&TimeOut_Para[0]))
 	{
