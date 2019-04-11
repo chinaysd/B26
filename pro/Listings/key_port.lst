@@ -1,0 +1,85 @@
+C51 COMPILER V9.59.0.0   KEY_PORT                                                          04/11/2019 18:38:02 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE KEY_PORT
+OBJECT MODULE PLACED IN .\Objects\key_port.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\bsp\key_port.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\user;..\T
+                    -imeOut) DEBUG OBJECTEXTEND PRINT(.\Listings\key_port.lst) TABS(7) OBJECT(.\Objects\key_port.obj)
+
+line level    source
+
+   1          #include "key_port.h"
+   2          #include "bsp_pwm.h"
+   3          
+   4          extern unsigned long get_key_data;
+   5          
+   6          unsigned long Key_Port_Read(unsigned char num){
+   7   1             if(num == 1){
+   8   2                    if(get_key_data == KEY_LIGHT_VALUE){
+   9   3                          return KEY_LIGHT_VALUE;
+  10   3                    }else{
+  11   3                           return 0x00;
+  12   3                    }
+  13   2             }else if(num == 2){
+  14   2                    if(get_key_data == KEY_CUP_VALUE){
+  15   3                           return KEY_CUP_VALUE;
+  16   3                     }else{
+  17   3                            return 0x00;
+  18   3                     }
+  19   2             }else if(num == 3){
+  20   2                    if(get_key_data == KEY_HOME_VALUE){
+  21   3                           return KEY_HOME_VALUE;
+  22   3                     }else{
+  23   3                            return 0x00;
+  24   3                     }
+  25   2             }else if(num == 4){
+  26   2                    if(get_key_data == KEY_OPEN_VALUE){
+  27   3                            return KEY_OPEN_VALUE;
+  28   3                     }else{
+  29   3                            return 0x00;
+  30   3                     }
+  31   2             }else if(num == 5){
+  32   2                     if(get_key_data == KEY_CLOSE_VALUE){
+  33   3                             return KEY_CLOSE_VALUE;
+  34   3                     }else{
+  35   3                             return 0x00;
+  36   3                     }
+  37   2             }else if(num == 6){
+  38   2                     if(get_key_data == KEY_HEAD_UP_VALUE){
+  39   3                             return KEY_HEAD_UP_VALUE;
+  40   3                      }else{
+  41   3                             return 0x00;
+  42   3                      }
+  43   2             }else if(num == 7){
+  44   2                     if(get_key_data == KEY_HEAD_DOWN_VALUE){
+  45   3                             return KEY_HEAD_DOWN_VALUE;
+  46   3                      }else{
+  47   3                             return 0x00;
+  48   3                      }
+  49   2             }else if(num == 8){
+  50   2                     if(get_key_data == KEY_LOCK_VALUE){
+  51   3                             return KEY_LOCK_VALUE;
+  52   3                      }else{
+  53   3                             return 0x00;
+  54   3                      }
+C51 COMPILER V9.59.0.0   KEY_PORT                                                          04/11/2019 18:38:02 PAGE 2   
+
+  55   2             }else{
+  56   2                    return 0X00;
+  57   2             } 
+  58   1      }
+  59          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    287    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
