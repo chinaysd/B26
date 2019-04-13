@@ -1,20 +1,28 @@
 #include "system.h"
 
 
-
-
 void System_Init(void)
 {
-     CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
-     Led_Init();
-     Timer_Init();
-     enableInterrupts(); //开启中断
+	CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+	TimeOutDet_Init();
+	Pushrod_Init();
+	Led_Init();
+	Warm_Init();
+	Timer_Init();
+	Uart_Init();
+	Mass_Init();
+	Mass_Deinit();
+	Msg_Register(Msg_Function);
+	enableInterrupts(); //开启中断
 }
 
-void System_Handle(void)
+#if 0
+MSG_STATUS System_Handle(void)
 {
-
+	 
 }
+#endif
+
 
 
 

@@ -217,24 +217,16 @@ INTERRUPT_HANDLER(SPI_IRQHandler, 10)
   * @param  None
   * @retval None
   */
-INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)
+INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_BRK_IRQHandler, 11)      //2ms
 {
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-       static unsigned char Cnts;
        if(TIM1_GetITStatus(TIM1_IT_UPDATE) != RESET)
 	{
-	    TIM1_ClearITPendingBit(TIM1_IT_UPDATE);
-		++ Cnts;
-		if(Cnts & 0x01)
-		{
-			LED1_SET(1);
-		}
-		else
-		{
-			LED1_SET(0);
-		}
+	       TIM1_ClearITPendingBit(TIM1_IT_UPDATE);
+		TimeOutDet_DecHandle();
+		MassTimeHandle();
 	}
 }
 
@@ -351,6 +343,13 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+     #if 0
+     while(UART1_GetITStatus(UART1_IT_IDLE) == RESET);
+     RevData_Handle();
+     #else
+     UART1_ClearITPendingBit(UART1_IT_RXNE);
+     RevData_Handle();
+     #endif
  }
 #endif /*STM8S208 or STM8S207 or STM8S103 or STM8S903 or STM8AF62Ax or STM8AF52Ax */
 

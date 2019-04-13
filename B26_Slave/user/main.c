@@ -21,8 +21,7 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm8s.h"
-#include "system.h"
+#include "bsp_msg.h"
 
 /* Private defines -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -31,12 +30,11 @@
 void main(void)
 {
   /* Infinite loop */
-  System_Init();
+  Msg_Init();
   while (1)
   {
-  	System_Handle();
+  	Msg_Poll();
   }
-  
 }
 
 #ifdef USE_FULL_ASSERT

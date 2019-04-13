@@ -2103,7 +2103,22 @@
             <name>$PROJ_DIR$\..\bsp\bsp_led.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_mass.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_msg.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_pushrod.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\bsp\bsp_timer.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_warm.c</name>
         </file>
     </group>
     <group>
