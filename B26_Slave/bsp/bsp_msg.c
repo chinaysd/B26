@@ -21,24 +21,32 @@ static MSG_STATUS Msg_Scanf(void)
 		memset(&Rev_String,0,sizeof(Rev_String));
 		switch (Get_Data)
 		{
+			case  Msg_NonValue:             return Msg_NonValue;          break;
 			case  Msg_PushAOpen:          return Msg_PushAOpen;        break;
 			case  Msg_PushAClose:          return Msg_PushAClose;       break;
 			case  Msg_PushBOpen:          return Msg_PushBOpen;        break;
 			case  Msg_PushBClose:         return Msg_PushBClose;         break;
+
+                    case  Msg_PushCOpen:          return Msg_PushCOpen;        break;
+			case  Msg_PushCClose:          return Msg_PushCClose;       break;
+			case  Msg_PushDOpen:          return Msg_PushDOpen;        break;
+			case  Msg_PushDClose:         return Msg_PushDClose;         break;
+			
 			case  Msg_PushRegister:       return Msg_PushRegister;       break;
-			case  Msg_PushResetClose:   return Msg_PushResetClose;   break;
 			case  Msg_WarmOpen:          return Msg_WarmOpen;         break;
 			case  Msg_WarmClose:          return Msg_WarmClose;        break;
 			case  Msg_Led1Open:            return Msg_Led1Open;          break;
 			case  Msg_Led1Close:           return Msg_Led1Close;          break;
 			case  Msg_MassOpen:           return Msg_MassOpen;          break;
 			case  Msg_MassClose:          return Msg_MassClose;          break;
+			case  Msg_PushAStop:          return Msg_PushAStop;          break;
+			case  Msg_PushBStop:          return Msg_PushBStop;          break;
 			default:                              return Msg_NonValue;           break;
 		}
 	 }
 	 else
 	 {
-	 	return Msg_NonValue; 
+	 	return Msg_PushAStop; 
 	 }
 }
 
@@ -46,7 +54,11 @@ void Msg_Function(unsigned char GetValue)
 {
 	if(GetValue == Msg_NonValue)
 	{
-		//PushReset_Control(PushStop);
+		PushControl(PUSHA_ADDR,PushStop);
+		PushControl(PUSHB_ADDR,PushStop);
+		PushControl(PUSHC_ADDR,PushStop);
+		PushControl(PUSHD_ADDR,PushStop);
+		Reset_EndHandle();
 	}
 	else if(GetValue == Msg_PushAOpen)
 	{
@@ -64,13 +76,26 @@ void Msg_Function(unsigned char GetValue)
 	{
 		PushControl(PUSHB_ADDR,PushClose);
 	}
+
+	else if(GetValue == Msg_PushCOpen)
+	{
+		PushControl(PUSHC_ADDR,PushOpen);
+	}
+	else if(GetValue == Msg_PushCClose)
+	{
+		PushControl(PUSHC_ADDR,PushClose);
+	}
+	else if(GetValue == Msg_PushDOpen)
+	{
+		PushControl(PUSHD_ADDR,PushOpen);
+	}
+	else if(GetValue == Msg_PushDClose)
+	{
+		PushControl(PUSHD_ADDR,PushClose);
+	}
 	else if(GetValue == Msg_PushRegister)
 	{
 		PushReset_Control(PushReset);
-	}
-	else if(GetValue == Msg_PushResetClose)
-	{
-		PushReset_Control(PushStop);
 	}
 	else if(GetValue == Msg_WarmOpen)
 	{

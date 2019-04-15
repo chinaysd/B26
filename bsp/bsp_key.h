@@ -15,15 +15,30 @@
 #define 	KEY_CPH_TIME			100				//  200ms	³¤°´±£³Ö´¥·¢Ê±¼
 
 
-#define       NoData           0x55
-#define       LightData        0x01
-#define       CupData          0x02
-#define       HomeData       0x03
-#define       OpenData        0x04
-#define       CloseData        0x05
-#define       HeadUpData     0x06
-#define       HeadDownData  0x07
-#define       LockData           0x08
+#define       NoData                    0x00
+#define       OpenData                 0x01
+#define       CloseData                 0x02
+#define       HeadUpData              0x03
+#define       HeadDownData          0x04
+#define       LumbarOpenData       0x05
+#define       LumbarCloseData       0x06
+#define       TableOpenData         0x07       
+#define       TableCloseData         0x08
+#define       HomeData                0x09
+
+
+#define       WarmOpenData       0x0A
+#define       WarmCloseData       0x0B
+
+#define       Led1_OpenData       0x0C
+#define       Led1_CloseData       0x0D
+
+#define       Mass_OpenData       0x0E
+#define       Mass_CloseData       0x0F
+
+#define       LockData                 0x99
+
+
 
 #if 0
 typedef enum
@@ -88,6 +103,16 @@ typedef enum
 	MSG_KEY8_LONGPRESS, 	
 	MSG_KEY8_LONGPRESS_HD,	
 	MSG_KEY8_LONGPRESS_RE,
+	MSG_KEY9_PRESS,				
+	MSG_KEY9_SHORT_PRESS, 				
+	MSG_KEY9_LONGPRESS, 	
+	MSG_KEY9_LONGPRESS_HD,	
+	MSG_KEY9_LONGPRESS_RE,
+	MSG_KEY10_PRESS,				
+	MSG_KEY10_SHORT_PRESS, 				
+	MSG_KEY10_LONGPRESS, 	
+	MSG_KEY10_LONGPRESS_HD,	
+	MSG_KEY10_LONGPRESS_RE,
 	MSG_INVALID = 0XFF
 }t_KEY_MSG;
 

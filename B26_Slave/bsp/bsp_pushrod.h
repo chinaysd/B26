@@ -32,6 +32,7 @@
 #define PUSHA_ADDR    0X01
 #define PUSHB_ADDR    0X02
 #define PUSHC_ADDR    0X03
+#define PUSHD_ADDR    0X04
 
 #define ResetTrue       1
 #define ResetFalse      0
@@ -48,9 +49,11 @@ PUSH_STATUS;
 
 
 unsigned char Pushrod_Init(void);
-unsigned char PushControl(unsigned char addr,PUSH_STATUS Push_Status);
+void PushControl(unsigned char addr,PUSH_STATUS Push_Status);
 unsigned char PushReset_Control(PUSH_STATUS Push_Status);
 void Reset_BackHandle(void);
+void Reset_EndHandle(void);
+
 
 #endif
 

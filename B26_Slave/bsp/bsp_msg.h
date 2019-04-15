@@ -14,14 +14,19 @@ typedef enum
        Msg_PushAClose,
        Msg_PushBOpen,
        Msg_PushBClose,
+       Msg_PushCOpen,
+       Msg_PushCClose,
+       Msg_PushDOpen,
+       Msg_PushDClose,
        Msg_PushRegister,
-       Msg_PushResetClose,
        Msg_WarmOpen,
        Msg_WarmClose,
        Msg_Led1Open,
        Msg_Led1Close,
        Msg_MassOpen,
-       Msg_MassClose
+       Msg_MassClose,
+       Msg_PushAStop,
+       Msg_PushBStop
 }
 MSG_STATUS;
 

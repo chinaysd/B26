@@ -115,7 +115,7 @@
                 <RecentlyUsedMenus>1</RecentlyUsedMenus>
                 <MenuShadows>1</MenuShadows>
                 <ShowAllMenusAfterDelay>1</ShowAllMenusAfterDelay>
-                <CommandsUsage>920300000B00298100000100000013860000930100000C8100000500000056860000010000000E840000030000005E8600005A0100000E8100000200000003E10000010000000B8100000800000002840000010000004681000090000000</CommandsUsage>
+                <CommandsUsage>C60300000B00138600009301000029810000010000000C8100000500000056860000010000000E8400000300000003E10000010000000E810000020000005E860000760100000B81000008000000028400000100000046810000A8000000</CommandsUsage>
             </MFCToolBarParameters>
             <CommandManager>
                 <CommandsWithoutImages>0000</CommandsWithoutImages>
@@ -786,7 +786,7 @@
                 <expressions>
                     <item>Rev_Num</item>
                     <item>Rev_Data</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

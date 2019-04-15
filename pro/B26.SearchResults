@@ -1,4 +1,2 @@
----- LED1_SET Matches (3 in 2 files) ----
-bsp_led.h (C:\Users\Administrator\Desktop\B26\bsp):#define LED1_SET(X)   ((X)?(LED1_PIN=1):(LED1_PIN=0))
-bsp_timer.c (C:\Users\Administrator\Desktop\B26\bsp):	     LED1_SET(1);	
-bsp_timer.c (C:\Users\Administrator\Desktop\B26\bsp):		LED1_SET(0);
+---- PushAStopData Matches (1 in 1 files) ----
+bsp_key.h (C:\Users\Administrator\Desktop\B26\bsp):#define       PushAStopData        0x0d

@@ -26,7 +26,7 @@ unsigned char Pushrod_Init(void)
 
 
 
-unsigned char PushControl(unsigned char addr,PUSH_STATUS Push_Status)
+void PushControl(unsigned char addr,PUSH_STATUS Push_Status)
 {
 	if(addr == PUSHA_ADDR)
 	{
@@ -34,23 +34,16 @@ unsigned char PushControl(unsigned char addr,PUSH_STATUS Push_Status)
 		{
 			PushrodA1Set(1);
 			PushrodA2Set(0);
-			return 0;
 		}
 		else if(Push_Status == PushClose)
 		{
 			PushrodA2Set(1);
 			PushrodA1Set(0);
-			return 0;
 		}
 		else if(Push_Status == PushStop)
 		{
 			PushrodA2Set(0);
 			PushrodA1Set(0);
-			return 0;
-		}
-		else
-		{
-			return 1;
 		}
 	}
 	else if(addr == PUSHB_ADDR)
@@ -59,23 +52,16 @@ unsigned char PushControl(unsigned char addr,PUSH_STATUS Push_Status)
 		{
 			PushrodB1Set(1);
 			PushrodB2Set(0);
-			return 0;
 		}
 		else if(Push_Status == PushClose)
 		{
 			PushrodB1Set(0);
 			PushrodB2Set(1);
-			return 0;
 		}
 		else if(Push_Status == PushStop)
 		{
 			PushrodB1Set(0);
 			PushrodB2Set(0);
-			return 0;
-		}
-		else
-		{
-			return 1;
 		}
 	}
 	else if(addr == PUSHC_ADDR)
@@ -84,28 +70,35 @@ unsigned char PushControl(unsigned char addr,PUSH_STATUS Push_Status)
 		{
 			PushrodC1Set(1);
 			PushrodC2Set(0);
-			return 0;
 		}
 		else if(Push_Status == PushClose)
 		{
 			PushrodC1Set(0);
 			PushrodC2Set(1);
-			return 0;
 		}
 		else if(Push_Status == PushStop)
 		{
 			PushrodC1Set(0);
 			PushrodC2Set(0);
-			return 0;
-		}
-		else
-		{
-			return 1;
 		}
 	}
-	else
+	else if(addr == PUSHD_ADDR)
 	{
-		return 1;
+		if(Push_Status == PushOpen)
+		{
+			PushrodA1Set(1);
+			PushrodA2Set(0);
+		}
+		else if(Push_Status == PushClose)
+		{
+			PushrodA1Set(0);
+			PushrodA2Set(1);
+		}
+		else if(Push_Status == PushStop)
+		{
+			PushrodA1Set(0);
+			PushrodA2Set(0);
+		}
 	}
 }
 
@@ -142,12 +135,13 @@ void Reset_BackHandle(void)
 	             PushrodB2Set(1);
 		}
 	}
-	else
-	{
-		PushrodA2Set(0);
-		PushrodB2Set(0);
-		OnlyOneInputFlag = ResetFalse;
-		PushResetFlag = ResetFalse;
-	}
+}
+
+void Reset_EndHandle(void)
+{
+	PushrodA2Set(0);
+	PushrodB2Set(0);
+	OnlyOneInputFlag = ResetFalse;
+	PushResetFlag = ResetFalse;
 }
 

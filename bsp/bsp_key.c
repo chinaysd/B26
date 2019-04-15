@@ -3,6 +3,8 @@
 #include "key_port.h"
 #include "bsp_pwm.h"
 #include "bsp_lock.h"
+#include "bsp_motro.h"
+
 
 
 
@@ -31,7 +33,7 @@ static void (*GetValueCb)(unsigned char);
 	@function: 按键事件，更多按键时，对应增加按键按键
 	
 */
-static xdata unsigned char KeyEvent[9][5]=
+static xdata unsigned char KeyEvent[11][5]=
 {
 	//按键开始(按下)	    		短按								长按					长按保持						长按松开
 	{MSG_KEY_NONE,					MSG_KEY_NONE,						MSG_KEY_NONE,			MSG_KEY_NONE,						MSG_KEY_NONE},			// 空，无用
@@ -42,7 +44,9 @@ static xdata unsigned char KeyEvent[9][5]=
 	{MSG_KEY5_PRESS,				MSG_KEY5_SHORT_PRESS, 				MSG_KEY5_LONGPRESS, 	MSG_KEY5_LONGPRESS_HD,				MSG_KEY5_LONGPRESS_RE},	// key5
 	{MSG_KEY6_PRESS,				MSG_KEY6_SHORT_PRESS, 				MSG_KEY6_LONGPRESS, 	MSG_KEY6_LONGPRESS_HD,				MSG_KEY6_LONGPRESS_RE},	// key6
 	{MSG_KEY7_PRESS,				MSG_KEY7_SHORT_PRESS, 				MSG_KEY7_LONGPRESS, 	MSG_KEY7_LONGPRESS_HD,				MSG_KEY7_LONGPRESS_RE},	// key7
-       {MSG_KEY8_PRESS,				MSG_KEY8_SHORT_PRESS, 				MSG_KEY8_LONGPRESS, 	MSG_KEY8_LONGPRESS_HD,				MSG_KEY8_LONGPRESS_RE},	// key7
+       {MSG_KEY8_PRESS,				MSG_KEY8_SHORT_PRESS, 				MSG_KEY8_LONGPRESS, 	MSG_KEY8_LONGPRESS_HD,				MSG_KEY8_LONGPRESS_RE},	// key8
+	{MSG_KEY9_PRESS,			       MSG_KEY9_SHORT_PRESS,				MSG_KEY9_LONGPRESS,	 MSG_KEY9_LONGPRESS_HD, 			MSG_KEY9_LONGPRESS_RE},     // key9
+	{MSG_KEY10_PRESS,			       MSG_KEY10_SHORT_PRESS,				MSG_KEY10_LONGPRESS,	 MSG_KEY10_LONGPRESS_HD, 			MSG_KEY10_LONGPRESS_RE}, // key7
 };
 
 /**
@@ -69,6 +73,10 @@ static unsigned char GetKeyIndex(void)
 		cnt ++,value = 7;
 	if(Key_Port_Read(8))
 		cnt ++,value = 8;
+	if(Key_Port_Read(9))
+		cnt ++,value = 9;
+	if(Key_Port_Read(10))
+		cnt ++,value = 10;
 	if(cnt > 1)
 		value = MSG_INVALID;
 	return value;	
@@ -94,82 +102,93 @@ void Key_Function(unsigned char GetValue)
 	}
 	else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
 	{
-		if(SendBackData != LightData)
+		if((SendBackData != Led1_OpenData)||(SendBackData != Led1_CloseData))
 		{
-			SendBackData = LightData;
 			++ TempCnts;
 			if(TempCnts & 0x01)
 			{
-				Pwm15_Level();
+				SendBackData = Led1_OpenData;
+				Pwm100_Level();
 			}
 			else
 			{
-				Pwm100_Level();
+				SendBackData = Led1_CloseData;
+				Pwm15_Level();
 			}
 		}
 	}
-	else if((GetValue == MSG_KEY2_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
 	{
-		if(SendBackData != CupData)
-		{
-			SendBackData = CupData;
-			Motro_Handle();
-		}
+		Motro_Handle();
 	}
 	else if((GetValue == MSG_KEY3_PRESS)&&(!Lock_Flag))
-	{
-		if(SendBackData != HomeData)
-             {
-			SendBackData = HomeData;
-		}
-	}
-	else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != OpenData)
 		{
 			SendBackData = OpenData;
 		}
 	}
-	else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != CloseData)
 		{
 			SendBackData = CloseData;
 		}
 	}
-	else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != HeadUpData)
 		{
 			SendBackData = HeadUpData;
 		}
 	}
-	else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != HeadDownData)
 		{
 			SendBackData = HeadDownData;
 		}
 	}
-	else if((GetValue == MSG_KEY8_SHORT_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
+	{
+		if(SendBackData != LumbarOpenData)
+		{
+			SendBackData = LumbarOpenData;
+		}
+	}
+	else if((GetValue == MSG_KEY8_PRESS)&&(!Lock_Flag))
+	{
+              if(SendBackData != LumbarCloseData)
+		{
+			SendBackData = LumbarCloseData;
+		}
+	}
+	else if((GetValue == MSG_KEY9_PRESS)&&(!Lock_Flag))
+	{
+		 if(SendBackData != TableOpenData)
+		{
+			SendBackData = TableOpenData;
+		}
+	}
+	else if((GetValue == MSG_KEY10_PRESS)&&(!Lock_Flag))
+	{
+             if(SendBackData != TableCloseData)
+		{
+			SendBackData = TableCloseData;
+		}
+	}
+	else if((GetValue == MSG_KEY2_LONGPRESS_HD)&&(!Lock_Flag))
+	{
+		if(SendBackData != HomeData)
+             {
+			SendBackData = HomeData;
+		}
+	}
+	else if(GetValue == MSG_KEY1_LONGPRESS_HD)
 	{
 		if(SendBackData != LockData)
 		{
 			SendBackData = LockData;
-		}
-	}
-	else if((GetValue == MSG_KEY1_LONGPRESS_HD)&&(!Lock_Flag))
-	{
-		if(SendBackData != 0x88)
-		{
-			SendBackData = 0x88;
-		}
-	}
-	else if(GetValue == MSG_KEY8_LONGPRESS_HD)
-	{
-		if(SendBackData != 0x99)
-		{
-			SendBackData = 0x99;
 			Lock_Handle();
 		}
 	}
