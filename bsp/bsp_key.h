@@ -31,7 +31,7 @@
 #define       WarmCloseData       0x0B
 
 #define       Led1_OpenData       0x0C
-#define       Led1_CloseData       0x0D
+#define       Led1_CloseData       0xAA
 
 #define       Mass_OpenData       0x0E
 #define       Mass_CloseData       0x0F

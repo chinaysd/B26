@@ -1,0 +1,7 @@
+---- TableReturnValue Matches (6 in 3 files) ----
+bsp_table.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):unsigned char TableReturnValue(void)
+bsp_table.h (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):unsigned char TableReturnValue(void);
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):				           if(TableReturnValue() == TABLE_ENABLE){
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):				           if(TableReturnValue() == TABLE_ENABLE){
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):					    if(TableReturnValue() == TABLE_ENABLE){
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):	 if(TableReturnValue() == TABLE_DISABLE)

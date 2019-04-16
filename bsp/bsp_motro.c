@@ -38,7 +38,7 @@ void Motro_Interrupt_Handle(void)
 {
       if(UpFlag){
          UpCnts ++;
-         if(UpCnts > 20000){
+         if(UpCnts > 12000){
 		  UpCnts = 0;
 		  DownCnts = 0;
                P0 &= 0Xf9;
@@ -48,7 +48,7 @@ void Motro_Interrupt_Handle(void)
 	  }
      if(DownFlag){
         DownCnts ++;
-        if(DownCnts > 20000){
+        if(DownCnts > 12000){
               UpCnts = 0;
 		 DownCnts = 0;
               P0 &= 0Xf9;

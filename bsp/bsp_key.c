@@ -17,6 +17,8 @@ typedef enum {
 
 unsigned char SendBackData;
 unsigned long get_key_data;
+
+unsigned char LedOnlyOneInputFlag;
 //KEY_MSG_STATUS KeyMsgStatus;
 
 static TIMEOUT_PARA Key_Scan_Timer,Key_Wait_Timer;
@@ -25,6 +27,7 @@ static t_KEY_MSG Key_Msg;
 static unsigned char PreKeyIndex = MSG_INVALID;
 
 extern unsigned char Lock_Flag;
+extern unsigned char Pwm_Level;
 
 static void (*GetValueCb)(unsigned char);
 
@@ -92,16 +95,25 @@ void  Key_Init(void)
 
 void Key_Function(unsigned char GetValue)
 {
-	static unsigned char TempCnts;
+	static unsigned char TempCnts,LockCnts,LockFlag;
 	if(GetValue == MSG_KEY_NONE)
 	{
-		if(SendBackData != NoData)
+		if((SendBackData == Led1_OpenData)||(SendBackData == Led1_CloseData))
 		{
-			SendBackData = NoData;
+			LedOnlyOneInputFlag = 0;
 		}
+		else
+		{
+			if(SendBackData != NoData)
+			{
+				SendBackData = NoData;
+			}
+		}
+		LockFlag = 0;
 	}
 	else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
 	{
+		#if 0
 		if((SendBackData != Led1_OpenData)||(SendBackData != Led1_CloseData))
 		{
 			++ TempCnts;
@@ -116,6 +128,23 @@ void Key_Function(unsigned char GetValue)
 				Pwm15_Level();
 			}
 		}
+		#else
+              if(!LedOnlyOneInputFlag)
+              {
+			LedOnlyOneInputFlag = 1;
+			++ TempCnts;
+			if(TempCnts & 0x01)
+			{
+				SendBackData = Led1_OpenData;
+				Pwm100_Level();
+			}
+			else
+			{
+				SendBackData = Led1_CloseData;
+				Pwm15_Level();
+			}
+	        }
+		#endif
 	}
 	else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
 	{
@@ -186,11 +215,45 @@ void Key_Function(unsigned char GetValue)
 	}
 	else if(GetValue == MSG_KEY1_LONGPRESS_HD)
 	{
+		#if 0
 		if(SendBackData != LockData)
 		{
 			SendBackData = LockData;
+			++ LockCnts;
 			Lock_Handle();
+			if(LockCnts & 0x01)
+			{
+				Pwm_Level = 0
+			}
+			else
+			{
+				
+			}
 		}
+		#else
+		if(!LockFlag)
+		{
+                    LockFlag = 1;
+		       ++ LockCnts;
+			Lock_Handle();
+			if(LockCnts & 0x01)
+			{
+				Pwm_Level = 0;
+			}
+			else
+			{
+				if(SendBackData == Led1_OpenData)
+				{
+					Pwm_Level = 100;
+				}
+				else if(SendBackData == Led1_CloseData)
+				{
+					Pwm_Level = 15;
+				}
+			}
+		}
+
+		#endif
 	}
 }
 /**

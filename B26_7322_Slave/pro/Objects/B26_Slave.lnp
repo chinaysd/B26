@@ -1,0 +1,12 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\system.obj",
+".\Objects\bsp_led.obj",
+".\Objects\bsp_timer.obj",
+".\Objects\bsp_uart.obj",
+".\Objects\bsp_push.obj",
+".\Objects\bsp_table.obj",
+".\Objects\bsp_key.obj",
+".\Objects\TimeOut.obj" 
+TO ".\Objects\B26_Slave" 
+PRINT(".\Listings\B26_Slave.m51") RAMSIZE(256) 

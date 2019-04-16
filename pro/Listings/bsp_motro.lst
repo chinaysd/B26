@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         04/15/2019 11:37:20 PAGE 1   
+C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         04/16/2019 15:05:43 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_MOTRO
@@ -48,7 +48,7 @@ line level    source
   38          {
   39   1            if(UpFlag){
   40   2               UpCnts ++;
-  41   2               if(UpCnts > 20000){
+  41   2               if(UpCnts > 12000){
   42   3                      UpCnts = 0;
   43   3                      DownCnts = 0;
   44   3                     P0 &= 0Xf9;
@@ -58,11 +58,11 @@ line level    source
   48   2               }
   49   1           if(DownFlag){
   50   2              DownCnts ++;
-  51   2              if(DownCnts > 20000){
+  51   2              if(DownCnts > 12000){
   52   3                    UpCnts = 0;
   53   3                     DownCnts = 0;
   54   3                    P0 &= 0Xf9;
-C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         04/15/2019 11:37:20 PAGE 2   
+C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         04/16/2019 15:05:43 PAGE 2   
 
   55   3                    UpFlag = 0;
   56   3                     DownFlag = 0;
