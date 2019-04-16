@@ -1,7 +1,7 @@
 #include "bsp_push.h"
 
 static unsigned char OnlyOneInputFlag,OnlyTwoInputFlag;
-TIMEOUT_PARA TimeOut_Para[3];
+TIMEOUT_PARA TimeOut_Para[4];
 
 
 void Push_Init(void)

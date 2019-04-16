@@ -12,7 +12,7 @@ void System_Init(void)
        Led_Init();
 	Lock_Init();
        Timer_Init();
-	Key_Init();
+	//Key_Init();
 	Key_Register(Key_Function);
 	Wdt_Init();
 	Uart_Init(2,9600);

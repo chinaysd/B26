@@ -2,9 +2,9 @@
 
 
 extern unsigned char Rev_String[REV_BUF_SIZE];
-extern TIMEOUT_PARA TimeOut_Para[3];
+extern TIMEOUT_PARA TimeOut_Para[4];
 
-unsigned char TableOnlyOneInputFlag;
+unsigned char TableOnlyOneInputFlag,TableOnlyTwoInputFlag;
 unsigned int    TableOnlyOneInputCnts;
 unsigned int  RevData;
 
@@ -24,7 +24,7 @@ void System_Init(void)
 void System_Handle(void)
 {
 	
-	if((Key_Handle(KEY1_ID)) &&(Key_Handle(KEY2_ID)))
+	if((0==(Key_Handle(KEY1_ID)))&&(0==(Key_Handle(KEY2_ID))))
 	{
 		 if(Rev_Select())
 		 {
@@ -93,7 +93,7 @@ void System_Handle(void)
 			}
 		 }
 	}
-	else if((0==(Key_Handle(KEY1_ID)))&&(0==(Key_Handle(KEY2_ID))))
+	else if((Key_Handle(KEY1_ID)) &&(Key_Handle(KEY2_ID)))
 	{
 		if(Rev_Select())
 		 {
@@ -289,6 +289,7 @@ void System_Handle(void)
 							Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							TableOnlyOneInputFlag = 0;
 							TableOnlyOneInputCnts = 0;
+							TableOnlyTwoInputFlag = 0;
 							}
 							break;
 			}
@@ -302,13 +303,21 @@ void System_Handle(void)
 	 	if(!TableOnlyOneInputFlag)
 	 	{
 			TableOnlyOneInputFlag =1;
-			TimeOut_Record(&TimeOut_Para[2],15000);
-			Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+			TimeOut_Record(&TimeOut_Para[2],4000);
+			Push_Handle(PUSHD_ADDR,PUSH_STOP);
 		}
 		if(TimeOutDet_Check(&TimeOut_Para[2]))
 		{
-			Push_Handle(PUSHD_ADDR,PUSH_STOP);
-			//TableOnlyOneInputFlag = 0;
+			Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+			if(!TableOnlyTwoInputFlag)
+			{
+				TableOnlyTwoInputFlag = 1;
+				TimeOut_Record(&TimeOut_Para[3],14000);
+			}
+			if(TimeOutDet_Check(&TimeOut_Para[3]))
+			{
+				Push_Handle(PUSHD_ADDR,PUSH_STOP);
+			}
 		}
 		#else
 		if(!TableOnlyOneInputFlag)
@@ -325,6 +334,12 @@ void System_Handle(void)
 			Push_Handle(PUSHD_ADDR,PUSH_STOP);
 	       }
 		#endif
+	 }
+	 else
+	 {
+	 	TableOnlyOneInputFlag = 0;
+		TableOnlyOneInputCnts = 0;
+		TableOnlyTwoInputFlag = 0;
 	 }
 	 #endif
 }
