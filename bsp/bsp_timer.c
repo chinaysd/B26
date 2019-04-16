@@ -20,12 +20,12 @@ void Timer_Init(void)
 	ET1 = 1;                      //定时器1允许
 	TR1 = 1;                      //打开定时器1
 	#endif
-	#if 0
+	#if 1
 	//T2设置
 	T2MOD = 0x00;
 	T2CON = 0x00;	              //设置为16位重载寄存器
-	RCAP2H = (65536-100)/256;   //溢出时间：时钟为Fsys，则12000*（1/Fsys）;
-	RCAP2L = (65536-100)%256;
+	RCAP2H = (65536-1000)/256;   //溢出时间：时钟为Fsys，则12000*（1/Fsys）;
+	RCAP2L = (65536-1000)%256;
 	TR2 = 0;
 	ET2 = 1;                      //定时器2允许
 	TR2 = 1;                      //打开定时器2
@@ -40,11 +40,13 @@ void Timer_Init(void)
 **************************************************/
 void timer0() interrupt 1     //100us
 {
+	EA = 0;
        TL0 = (65536 - 1000)%256;
 	TH0 = (65536 - 1000)/256;
 	TimeOutDet_DecHandle();
-	Pwm_Handle();
 	Motro_Interrupt_Handle();
+	Pwm_Handle();
+	EA = 1;
 }
 
 void timer1() interrupt 3     //100us
@@ -58,5 +60,6 @@ void Timer2Int(void) interrupt 5    //1s
 {		
 	TF2 = 0;   //溢出清零
       //P25 = ~P25;
+      
 }
 
