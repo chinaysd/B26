@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 1   
+C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 19:20:44 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_KEY
@@ -62,7 +62,7 @@ line level    source
              -GPRESS_RE},       // key5
   48                 {MSG_KEY6_PRESS,                          MSG_KEY6_SHORT_PRESS,                            MSG_KEY6_LONGPRESS,  MSG_KEY6_LONGPRESS_HD,                           MSG_KEY6_LON
              -GPRESS_RE},       // key6
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 2   
+C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 19:20:44 PAGE 2   
 
   49                 {MSG_KEY7_PRESS,                          MSG_KEY7_SHORT_PRESS,                            MSG_KEY7_LONGPRESS,  MSG_KEY7_LONGPRESS_HD,                           MSG_KEY7_LON
              -GPRESS_RE},       // key7
@@ -117,7 +117,7 @@ line level    source
   95          
   96          void Key_Function(unsigned char GetValue)
   97          {
-  98   1             static unsigned char TempCnts,LockCnts,LockFlag;
+  98   1             static unsigned char TempCnts,LockFlag;
   99   1             if(GetValue == MSG_KEY_NONE)
  100   1             {
  101   2                    if((SendBackData == Led1_OpenData)||(SendBackData == Led1_CloseData))
@@ -126,7 +126,7 @@ line level    source
  104   3                    }
  105   2                    else
  106   2                    {
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 3   
+C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 19:20:44 PAGE 3   
 
  107   3                           if(SendBackData != NoData)
  108   3                           {
@@ -137,260 +137,177 @@ line level    source
  113   2             }
  114   1             else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
  115   1             {
- 116   2                    #if 0
-                            if((SendBackData != Led1_OpenData)||(SendBackData != Led1_CloseData))
-                            {
-                                   ++ TempCnts;
-                                   if(TempCnts & 0x01)
-                                   {
-                                          SendBackData = Led1_OpenData;
-                                          Pwm100_Level();
-                                   }
-                                   else
-                                   {
-                                          SendBackData = Led1_CloseData;
-                                          Pwm15_Level();
-                                   }
-                            }
-                            #else
- 132   2                    if(!LedOnlyOneInputFlag)
- 133   2                    {
- 134   3                           LedOnlyOneInputFlag = 1;
- 135   3                           ++ TempCnts;
- 136   3                           if(TempCnts & 0x01)
- 137   3                           {
- 138   4                                  SendBackData = Led1_OpenData;
- 139   4                                  Pwm100_Level();
- 140   4                           }
- 141   3                           else
- 142   3                           {
- 143   4                                  SendBackData = Led1_CloseData;
- 144   4                                  Pwm15_Level();
- 145   4                           }
- 146   3                     }
- 147   2                    #endif
- 148   2             }
- 149   1             else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
- 150   1             {
- 151   2                    Motro_Handle();
- 152   2             }
- 153   1             else if((GetValue == MSG_KEY3_PRESS)&&(!Lock_Flag))
- 154   1             {
- 155   2                    if(SendBackData != OpenData)
- 156   2                    {
- 157   3                           SendBackData = OpenData;
- 158   3                    }
- 159   2             }
- 160   1             else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
- 161   1             {
- 162   2                    if(SendBackData != CloseData)
- 163   2                    {
- 164   3                           SendBackData = CloseData;
- 165   3                    }
- 166   2             }
- 167   1             else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
- 168   1             {
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 4   
+ 116   2                    if(!LedOnlyOneInputFlag)
+ 117   2                    {
+ 118   3                           LedOnlyOneInputFlag = 1;
+ 119   3                           ++ TempCnts;
+ 120   3                           if(TempCnts & 0x01)
+ 121   3                           {
+ 122   4                                  SendBackData = Led1_OpenData;
+ 123   4                                  Pwm100_Level();
+ 124   4                           }
+ 125   3                           else
+ 126   3                           {
+ 127   4                                  SendBackData = Led1_CloseData;
+ 128   4                                  Pwm15_Level();
+ 129   4                           }
+ 130   3                     }
+ 131   2             }
+ 132   1             else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
+ 133   1             {
+ 134   2                    Motro_Handle();
+ 135   2             }
+ 136   1             else if((GetValue == MSG_KEY3_PRESS)&&(!Lock_Flag))
+ 137   1             {
+ 138   2                    if(SendBackData != HomeData)
+ 139   2                   {
+ 140   3                           SendBackData = HomeData;
+ 141   3                    }
+ 142   2             }
+ 143   1             else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
+ 144   1             {
+ 145   2                    if(SendBackData != OpenData)
+ 146   2                    {
+ 147   3                           SendBackData = OpenData;
+ 148   3                    }
+ 149   2             }
+ 150   1             else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
+ 151   1             {
+ 152   2                    if(SendBackData != CloseData)
+ 153   2                    {
+ 154   3                           SendBackData = CloseData;
+ 155   3                    }
+ 156   2             }
+ 157   1             else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
+ 158   1             {
+ 159   2                    if(SendBackData != HeadUpData)
+ 160   2                    {
+ 161   3                           SendBackData = HeadUpData;
+ 162   3                    }
+ 163   2             }
+ 164   1             else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
+ 165   1             {
+ 166   2                    if(SendBackData != HeadDownData)
+ 167   2                    {
+ 168   3                           SendBackData = HeadDownData;
+C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 19:20:44 PAGE 4   
 
- 169   2                    if(SendBackData != HeadUpData)
- 170   2                    {
- 171   3                           SendBackData = HeadUpData;
- 172   3                    }
- 173   2             }
- 174   1             else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
- 175   1             {
- 176   2                    if(SendBackData != HeadDownData)
- 177   2                    {
- 178   3                           SendBackData = HeadDownData;
- 179   3                    }
- 180   2             }
- 181   1             else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
- 182   1             {
- 183   2                    if(SendBackData != LumbarOpenData)
- 184   2                    {
- 185   3                           SendBackData = LumbarOpenData;
- 186   3                    }
- 187   2             }
- 188   1             else if((GetValue == MSG_KEY8_PRESS)&&(!Lock_Flag))
- 189   1             {
- 190   2                    if(SendBackData != LumbarCloseData)
- 191   2                    {
- 192   3                           SendBackData = LumbarCloseData;
- 193   3                    }
- 194   2             }
- 195   1             else if((GetValue == MSG_KEY9_PRESS)&&(!Lock_Flag))
- 196   1             {
- 197   2                     if(SendBackData != TableOpenData)
- 198   2                    {
- 199   3                           SendBackData = TableOpenData;
- 200   3                    }
- 201   2             }
- 202   1             else if((GetValue == MSG_KEY10_PRESS)&&(!Lock_Flag))
- 203   1             {
- 204   2                   if(SendBackData != TableCloseData)
- 205   2                    {
- 206   3                           SendBackData = TableCloseData;
- 207   3                    }
- 208   2             }
- 209   1             else if((GetValue == MSG_KEY2_LONGPRESS_HD)&&(!Lock_Flag))
- 210   1             {
- 211   2                    if(SendBackData != HomeData)
- 212   2                   {
- 213   3                           SendBackData = HomeData;
- 214   3                    }
- 215   2             }
- 216   1             else if(GetValue == MSG_KEY1_LONGPRESS_HD)
- 217   1             {
- 218   2                    #if 0
-                            if(SendBackData != LockData)
-                            {
-                                   SendBackData = LockData;
-                                   ++ LockCnts;
-                                   Lock_Handle();
-                                   if(LockCnts & 0x01)
-                                   {
-                                          Pwm_Level = 0
-                                   }
-                                   else
-                                   {
-                                          
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 5   
-
-                                   }
-                            }
-                            #else
- 234   2                    if(!LockFlag)
- 235   2                    {
- 236   3                          LockFlag = 1;
- 237   3                           ++ LockCnts;
- 238   3                           Lock_Handle();
- 239   3                           if(LockCnts & 0x01)
- 240   3                           {
- 241   4                                  Pwm_Level = 0;
- 242   4                           }
- 243   3                           else
- 244   3                           {
- 245   4                                  if(SendBackData == Led1_OpenData)
- 246   4                                  {
- 247   5                                         Pwm_Level = 100;
- 248   5                                  }
- 249   4                                  else if(SendBackData == Led1_CloseData)
- 250   4                                  {
- 251   5                                         Pwm_Level = 15;
- 252   5                                  }
- 253   4                           }
- 254   3                    }
- 255   2      
- 256   2                    #endif
- 257   2             }
- 258   1      }
- 259          /**
- 260                 @function:°´¼üµÄÉ¨Ãè
- 261                 @return :t_KEY_MSG ÀàÐÍµÄÏûÏ¢£¬ÏûÏ¢¼¯ÔÚt_KEY_MSGÖÐ¶¨Òå
- 262          */
- 263          t_KEY_MSG Key_Scan(void){
- 264   1             unsigned char KeyIndex;
- 265   1             if(SOCAPI_TouchKeyStatus&0x80) // ÖØÒª²½Öè 2: ´¥Ãþ¼üÉ¨ÃèÒ»ÂÖ±êÖ¾£¬ÊÇ·ñµ÷ÓÃ TouchKeyScan() Ò»¶¨Òª¸ù¾Ý´Ë±êÖ
+ 169   3                    }
+ 170   2             }
+ 171   1             else if(GetValue == MSG_KEY10_LONGPRESS_HD)
+ 172   1             {
+ 173   2                  if(!LockFlag)
+ 174   2                    {
+ 175   3                          LockFlag = 1;
+ 176   3                           Lock_Handle();
+ 177   3                    }
+ 178   2             }
+ 179   1      }
+ 180          /**
+ 181                 @function:°´¼üµÄÉ¨Ãè
+ 182                 @return :t_KEY_MSG ÀàÐÍµÄÏûÏ¢£¬ÏûÏ¢¼¯ÔÚt_KEY_MSGÖÐ¶¨Òå
+ 183          */
+ 184          t_KEY_MSG Key_Scan(void){
+ 185   1             unsigned char KeyIndex;
+ 186   1             if(SOCAPI_TouchKeyStatus&0x80) // ÖØÒª²½Öè 2: ´¥Ãþ¼üÉ¨ÃèÒ»ÂÖ±êÖ¾£¬ÊÇ·ñµ÷ÓÃ TouchKeyScan() Ò»¶¨Òª¸ù¾Ý´Ë±êÖ
              -¾Î»ÖÃÆðºó
- 266   1             {
- 267   2                    SOCAPI_TouchKeyStatus &= 0x7f;// ÖØÒª²½Öè 3:  Çå³ý±êÖ¾Î»£¬ ÐèÒªÍâ²¿Çå³ý¡£
- 268   2                    get_key_data = TouchKeyScan();// °´¼üÊý¾Ý´¦Àíº¯Êý
- 269   2                    TouchKeyRestart();// Æô¶¯ÏÂÒ»ÂÖ×ª»»
- 270   2             }
- 271   1             
- 272   1             if(!(TimeOutDet_Check(&Key_Scan_Timer))){
- 273   2                    return MSG_INVALID;
- 274   2             }
- 275   1             
- 276   1             TimeOut_Record(&Key_Scan_Timer,KEY_SCAN_TIME);
- 277   1             
- 278   1             KeyIndex=GetKeyIndex();
- 279   1             if(KeyIndex == MSG_INVALID)
- 280   1                    return MSG_INVALID;
- 281   1      
- 282   1             switch(KeyState){
- 283   2                    case KEY_STATE_IDLE:{
- 284   3                           if(!KeyIndex){
- 285   4                                  return MSG_KEY_NONE;
- 286   4                           }
- 287   3                           PreKeyIndex = KeyIndex;
- 288   3                           TimeOut_Record(&Key_Wait_Timer,KEY_JITTER_TIME);
- 289   3                           KeyState = KEY_STATE_JITTER;
- 290   3                           break;
- 291   3                    }
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 6   
+ 187   1             {
+ 188   2                    SOCAPI_TouchKeyStatus &= 0x7f;// ÖØÒª²½Öè 3:  Çå³ý±êÖ¾Î»£¬ ÐèÒªÍâ²¿Çå³ý¡£
+ 189   2                    get_key_data = TouchKeyScan();// °´¼üÊý¾Ý´¦Àíº¯Êý
+ 190   2                    TouchKeyRestart();// Æô¶¯ÏÂÒ»ÂÖ×ª»»
+ 191   2             }
+ 192   1             
+ 193   1             if(!(TimeOutDet_Check(&Key_Scan_Timer))){
+ 194   2                    return MSG_INVALID;
+ 195   2             }
+ 196   1             
+ 197   1             TimeOut_Record(&Key_Scan_Timer,KEY_SCAN_TIME);
+ 198   1             
+ 199   1             KeyIndex=GetKeyIndex();
+ 200   1             if(KeyIndex == MSG_INVALID)
+ 201   1                    return MSG_INVALID;
+ 202   1      
+ 203   1             switch(KeyState){
+ 204   2                    case KEY_STATE_IDLE:{
+ 205   3                           if(!KeyIndex){
+ 206   4                                  return MSG_KEY_NONE;
+ 207   4                           }
+ 208   3                           PreKeyIndex = KeyIndex;
+ 209   3                           TimeOut_Record(&Key_Wait_Timer,KEY_JITTER_TIME);
+ 210   3                           KeyState = KEY_STATE_JITTER;
+ 211   3                           break;
+ 212   3                    }
+ 213   2                    
+ 214   2                    case KEY_STATE_JITTER:{
+ 215   3                           if(PreKeyIndex != KeyIndex){
+ 216   4                                  KeyState = KEY_STATE_IDLE;
+ 217   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
+ 218   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CP_TIME);
+ 219   4                                  KeyState = KEY_STATE_PRESS_DOWN;
+ 220   4                                  return KeyEvent[PreKeyIndex][0];
+ 221   4                           }
+ 222   3                           break;
+ 223   3                    }
+ 224   2      
+ 225   2                    case KEY_STATE_PRESS_DOWN:{
+ 226   3                           if(PreKeyIndex != KeyIndex){
+ 227   4                                  KeyState = KEY_STATE_IDLE;
+ 228   4                                  return KeyEvent[PreKeyIndex][1];
+ 229   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
+C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 19:20:44 PAGE 5   
 
- 292   2                    
- 293   2                    case KEY_STATE_JITTER:{
- 294   3                           if(PreKeyIndex != KeyIndex){
- 295   4                                  KeyState = KEY_STATE_IDLE;
- 296   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
- 297   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CP_TIME);
- 298   4                                  KeyState = KEY_STATE_PRESS_DOWN;
- 299   4                                  return KeyEvent[PreKeyIndex][0];
- 300   4                           }
- 301   3                           break;
- 302   3                    }
- 303   2      
- 304   2                    case KEY_STATE_PRESS_DOWN:{
- 305   3                           if(PreKeyIndex != KeyIndex){
- 306   4                                  KeyState = KEY_STATE_IDLE;
- 307   4                                  return KeyEvent[PreKeyIndex][1];
- 308   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
- 309   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CPH_TIME);
- 310   4                                  KeyState = KEY_STATE_CP;
- 311   4                                  return KeyEvent[PreKeyIndex][2];
- 312   4                           }
- 313   3                           break;
- 314   3                    }
- 315   2                    
- 316   2                    case KEY_STATE_CP:{
- 317   3                           if(PreKeyIndex != KeyIndex){
- 318   4                                  KeyState = KEY_STATE_IDLE;
- 319   4                                  return KeyEvent[PreKeyIndex][4];
- 320   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
- 321   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CPH_TIME);
- 322   4                                  return KeyEvent[PreKeyIndex][3];
- 323   4                           }
- 324   3                           break;
- 325   3                    }
- 326   2                    
- 327   2                    default:{
- 328   3                           KeyState = KEY_STATE_IDLE;
- 329   3                           break;
- 330   3                    }
- 331   2             }
- 332   1             return MSG_INVALID;
- 333   1      }
- 334          
- 335          
- 336          void Key_Register(void (*Cb)(unsigned char))
- 337          {
- 338   1             if(Cb)
- 339   1             {
- 340   2                    GetValueCb = Cb;
- 341   2             }
- 342   1      }
- 343          
- 344          void Key_Poll(void)
- 345          {
- 346   1             Key_Msg = Key_Scan();
- 347   1             if(GetValueCb)
- 348   1             {
- 349   2                    GetValueCb(Key_Msg);
- 350   2             }
- 351   1      }
- 352          
-
-C51 COMPILER V9.59.0.0   BSP_KEY                                                           04/16/2019 15:00:56 PAGE 7   
+ 230   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CPH_TIME);
+ 231   4                                  KeyState = KEY_STATE_CP;
+ 232   4                                  return KeyEvent[PreKeyIndex][2];
+ 233   4                           }
+ 234   3                           break;
+ 235   3                    }
+ 236   2                    
+ 237   2                    case KEY_STATE_CP:{
+ 238   3                           if(PreKeyIndex != KeyIndex){
+ 239   4                                  KeyState = KEY_STATE_IDLE;
+ 240   4                                  return KeyEvent[PreKeyIndex][4];
+ 241   4                           }else if(TimeOutDet_Check(&Key_Wait_Timer)){
+ 242   4                                  TimeOut_Record(&Key_Wait_Timer,KEY_CPH_TIME);
+ 243   4                                  return KeyEvent[PreKeyIndex][3];
+ 244   4                           }
+ 245   3                           break;
+ 246   3                    }
+ 247   2                    
+ 248   2                    default:{
+ 249   3                           KeyState = KEY_STATE_IDLE;
+ 250   3                           break;
+ 251   3                    }
+ 252   2             }
+ 253   1             return MSG_INVALID;
+ 254   1      }
+ 255          
+ 256          
+ 257          void Key_Register(void (*Cb)(unsigned char))
+ 258          {
+ 259   1             if(Cb)
+ 260   1             {
+ 261   2                    GetValueCb = Cb;
+ 262   2             }
+ 263   1      }
+ 264          
+ 265          void Key_Poll(void)
+ 266          {
+ 267   1             Key_Msg = Key_Scan();
+ 268   1             if(GetValueCb)
+ 269   1             {
+ 270   2                    GetValueCb(Key_Msg);
+ 271   2             }
+ 272   1      }
+ 273          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    918    ----
+   CODE SIZE        =    787    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     55    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     31       4
+   DATA SIZE        =     30       4
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

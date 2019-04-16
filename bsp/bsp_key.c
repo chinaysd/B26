@@ -95,7 +95,7 @@ void  Key_Init(void)
 
 void Key_Function(unsigned char GetValue)
 {
-	static unsigned char TempCnts,LockCnts,LockFlag;
+	static unsigned char TempCnts,LockFlag;
 	if(GetValue == MSG_KEY_NONE)
 	{
 		if((SendBackData == Led1_OpenData)||(SendBackData == Led1_CloseData))
@@ -113,22 +113,6 @@ void Key_Function(unsigned char GetValue)
 	}
 	else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
 	{
-		#if 0
-		if((SendBackData != Led1_OpenData)||(SendBackData != Led1_CloseData))
-		{
-			++ TempCnts;
-			if(TempCnts & 0x01)
-			{
-				SendBackData = Led1_OpenData;
-				Pwm100_Level();
-			}
-			else
-			{
-				SendBackData = Led1_CloseData;
-				Pwm15_Level();
-			}
-		}
-		#else
               if(!LedOnlyOneInputFlag)
               {
 			LedOnlyOneInputFlag = 1;
@@ -144,7 +128,6 @@ void Key_Function(unsigned char GetValue)
 				Pwm15_Level();
 			}
 	        }
-		#endif
 	}
 	else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
 	{
@@ -152,108 +135,46 @@ void Key_Function(unsigned char GetValue)
 	}
 	else if((GetValue == MSG_KEY3_PRESS)&&(!Lock_Flag))
 	{
+		if(SendBackData != HomeData)
+             {
+			SendBackData = HomeData;
+		}
+	}
+	else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
+	{
 		if(SendBackData != OpenData)
 		{
 			SendBackData = OpenData;
 		}
 	}
-	else if((GetValue == MSG_KEY4_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != CloseData)
 		{
 			SendBackData = CloseData;
 		}
 	}
-	else if((GetValue == MSG_KEY5_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != HeadUpData)
 		{
 			SendBackData = HeadUpData;
 		}
 	}
-	else if((GetValue == MSG_KEY6_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
 	{
 		if(SendBackData != HeadDownData)
 		{
 			SendBackData = HeadDownData;
 		}
 	}
-	else if((GetValue == MSG_KEY7_PRESS)&&(!Lock_Flag))
+	else if(GetValue == MSG_KEY10_LONGPRESS_HD)
 	{
-		if(SendBackData != LumbarOpenData)
-		{
-			SendBackData = LumbarOpenData;
-		}
-	}
-	else if((GetValue == MSG_KEY8_PRESS)&&(!Lock_Flag))
-	{
-              if(SendBackData != LumbarCloseData)
-		{
-			SendBackData = LumbarCloseData;
-		}
-	}
-	else if((GetValue == MSG_KEY9_PRESS)&&(!Lock_Flag))
-	{
-		 if(SendBackData != TableOpenData)
-		{
-			SendBackData = TableOpenData;
-		}
-	}
-	else if((GetValue == MSG_KEY10_PRESS)&&(!Lock_Flag))
-	{
-             if(SendBackData != TableCloseData)
-		{
-			SendBackData = TableCloseData;
-		}
-	}
-	else if((GetValue == MSG_KEY2_LONGPRESS_HD)&&(!Lock_Flag))
-	{
-		if(SendBackData != HomeData)
-             {
-			SendBackData = HomeData;
-		}
-	}
-	else if(GetValue == MSG_KEY1_LONGPRESS_HD)
-	{
-		#if 0
-		if(SendBackData != LockData)
-		{
-			SendBackData = LockData;
-			++ LockCnts;
-			Lock_Handle();
-			if(LockCnts & 0x01)
-			{
-				Pwm_Level = 0
-			}
-			else
-			{
-				
-			}
-		}
-		#else
-		if(!LockFlag)
+            if(!LockFlag)
 		{
                     LockFlag = 1;
-		       ++ LockCnts;
 			Lock_Handle();
-			if(LockCnts & 0x01)
-			{
-				Pwm_Level = 0;
-			}
-			else
-			{
-				if(SendBackData == Led1_OpenData)
-				{
-					Pwm_Level = 100;
-				}
-				else if(SendBackData == Led1_CloseData)
-				{
-					Pwm_Level = 15;
-				}
-			}
 		}
-
-		#endif
 	}
 }
 /**

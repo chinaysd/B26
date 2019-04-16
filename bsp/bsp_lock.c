@@ -18,13 +18,12 @@ void Lock_Handle(void)
 	if(!Lock_Flag)
 	{
 		Lock_Flag = Lock_True;
-		//RED_SET(1);
-		//Pwm_Level = 0;
+		RED_SET(1);
 	}
 	else
 	{
 		Lock_Flag = Lock_False;
-		//RED_SET(0);
+		RED_SET(0);
 	}
 }
 
