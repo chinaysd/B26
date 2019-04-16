@@ -22,11 +22,12 @@ typedef enum
        Msg_WarmOpen,
        Msg_WarmClose,
        Msg_Led1Open,
-       Msg_Led1Close,
+       //Msg_Led1Close,
        Msg_MassOpen,
        Msg_MassClose,
        Msg_PushAStop,
-       Msg_PushBStop
+       Msg_PushBStop,
+       Msg_Led1Close = 0XAA
 }
 MSG_STATUS;
 

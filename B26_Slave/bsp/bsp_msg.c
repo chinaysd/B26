@@ -36,7 +36,7 @@ static MSG_STATUS Msg_Scanf(void)
 			case  Msg_WarmOpen:          return Msg_WarmOpen;         break;
 			case  Msg_WarmClose:          return Msg_WarmClose;        break;
 			case  Msg_Led1Open:            return Msg_Led1Open;          break;
-			case  Msg_Led1Close:           return Msg_Led1Close;          break;
+			case  Msg_Led1Close:            return Msg_Led1Close;         break;
 			case  Msg_MassOpen:           return Msg_MassOpen;          break;
 			case  Msg_MassClose:          return Msg_MassClose;          break;
 			case  Msg_PushAStop:          return Msg_PushAStop;          break;

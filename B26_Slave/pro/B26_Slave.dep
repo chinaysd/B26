@@ -107,6 +107,15 @@
             <file>$PROJ_DIR$\..\bsp\bsp_warm.h</file>
         </outputs>
         <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 39 58</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\bsp\bsp_led.c</name>
             <outputs>
                 <tool>
@@ -523,15 +532,6 @@
                     <file> 56 87 91 93 20 90 34 98 35 59 51 36 50 49 48 47 42 18 54 55</file>
                 </tool>
             </inputs>
-        </file>
-        <file>
-            <name>[ROOT_NODE]</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 39 58</file>
-                </tool>
-            </outputs>
         </file>
         <forcedrebuild>
             <name>$PROJ_DIR$\..\user\main.c</name>
