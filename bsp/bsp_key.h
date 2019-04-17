@@ -9,10 +9,10 @@
 	@function: °´¼üÉ¨ÃèµÄÊ±¼ä¶¨Òå
 	@brief: Ê±»ù125us
 */
-#define 	KEY_SCAN_TIME			100				//	20ms		
-#define 	KEY_JITTER_TIME			100				// 	20ms
+#define 	KEY_SCAN_TIME			10				//	20ms		
+#define 	KEY_JITTER_TIME			10				// 	20ms
 #define 	KEY_CP_TIME				10000				//	ms
-#define 	KEY_CPH_TIME			100				//  200ms	³¤°´±£³Ö´¥·¢Ê±¼
+#define 	KEY_CPH_TIME			10				//  200ms	³¤°´±£³Ö´¥·¢Ê±¼
 
 
 #define       NoData                    0x00

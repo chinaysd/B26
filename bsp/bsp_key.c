@@ -111,7 +111,7 @@ void Key_Function(unsigned char GetValue)
 		}
 		LockFlag = 0;
 	}
-	else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY1_PRESS)&&(!Lock_Flag))
 	{
               if(!LedOnlyOneInputFlag)
               {
@@ -129,7 +129,7 @@ void Key_Function(unsigned char GetValue)
 			}
 	        }
 	}
-	else if((GetValue == MSG_KEY2_SHORT_PRESS)&&(!Lock_Flag))
+	else if((GetValue == MSG_KEY2_PRESS)&&(!Lock_Flag))
 	{
 		Motro_Handle();
 	}

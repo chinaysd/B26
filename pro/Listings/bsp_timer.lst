@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   BSP_TIMER                                                         04/16/2019 18:21:41 PAGE 1   
+C51 COMPILER V9.59.0.0   BSP_TIMER                                                         04/17/2019 20:10:56 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_TIMER
@@ -62,7 +62,7 @@ line level    source
   52          void timer1() interrupt 3     //100us
   53          {
   54   1             TL1 = (65536 - 100)%256;
-C51 COMPILER V9.59.0.0   BSP_TIMER                                                         04/16/2019 18:21:41 PAGE 2   
+C51 COMPILER V9.59.0.0   BSP_TIMER                                                         04/17/2019 20:10:56 PAGE 2   
 
   55   1             TH1 = (65536 - 100)/256;
   56   1      
