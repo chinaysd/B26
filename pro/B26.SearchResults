@@ -1,4 +1,5 @@
----- Lock_Handle Matches (3 in 3 files) ----
-bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):			Lock_Handle();
-bsp_lock.c (C:\Users\Administrator\Desktop\B26\bsp):void Lock_Handle(void)
-bsp_lock.h (C:\Users\Administrator\Desktop\B26\bsp):void Lock_Handle(void);
+---- LockFlag Matches (4 in 1 files) ----
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):	static unsigned char TempCnts,LockCnts,LockFlag;
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):		LockFlag = 0;
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):		if(!LockFlag)
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):                    LockFlag = 1;

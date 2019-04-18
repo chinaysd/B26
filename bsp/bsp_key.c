@@ -25,6 +25,7 @@ static TIMEOUT_PARA Key_Scan_Timer,Key_Wait_Timer;
 static KEY_STATE	KeyState;
 static t_KEY_MSG Key_Msg;
 static unsigned char PreKeyIndex = MSG_INVALID;
+static unsigned char Led1_OpenFlag;
 
 extern unsigned char Lock_Flag;
 extern unsigned char Pwm_Level;
@@ -95,7 +96,7 @@ void  Key_Init(void)
 
 void Key_Function(unsigned char GetValue)
 {
-	static unsigned char TempCnts,LockCnts,LockFlag;
+	static unsigned char TempCnts,LockCnts,LockOnlyOneFlag;
 	if(GetValue == MSG_KEY_NONE)
 	{
 		if((SendBackData == Led1_OpenData)||(SendBackData == Led1_CloseData))
@@ -104,12 +105,14 @@ void Key_Function(unsigned char GetValue)
 		}
 		else
 		{
-			if(SendBackData != NoData)
+			if((SendBackData == OpenData)||(SendBackData == CloseData)||(SendBackData == HeadUpData)\
+			||(SendBackData == HeadDownData)||(SendBackData == LumbarOpenData)||(LumbarCloseData)\
+			||(SendBackData == HomeData))
 			{
 				SendBackData = NoData;
 			}
 		}
-		LockFlag = 0;
+		LockOnlyOneFlag = 0;
 	}
 	else if((GetValue == MSG_KEY1_SHORT_PRESS)&&(!Lock_Flag))
 	{
@@ -136,11 +139,13 @@ void Key_Function(unsigned char GetValue)
 			if(TempCnts & 0x01)
 			{
 				SendBackData = Led1_OpenData;
+				Led1_OpenFlag = 1;
 				Pwm100_Level();
 			}
 			else
 			{
 				SendBackData = Led1_CloseData;
+				Led1_OpenFlag = 0;
 				Pwm15_Level();
 			}
 	        }
@@ -231,11 +236,15 @@ void Key_Function(unsigned char GetValue)
 			}
 		}
 		#else
-		if(!LockFlag)
+		if(!LockOnlyOneFlag)
 		{
-                    LockFlag = 1;
+                    LockOnlyOneFlag = 1;
 		       ++ LockCnts;
 			Lock_Handle();
+		}
+		else
+		{
+			#if 0
 			if(LockCnts & 0x01)
 			{
 				Pwm_Level = 0;
@@ -251,9 +260,30 @@ void Key_Function(unsigned char GetValue)
 					Pwm_Level = 15;
 				}
 			}
+			#else
+			#endif
 		}
 
 		#endif
+	}
+       if(LockCnts & 0x01)
+	{
+		Pwm_Level = 0;
+	}
+	else
+	{	
+		if(Led1_OpenFlag)
+		{
+			Pwm100_Level();
+		}
+		else if(Led1_OpenFlag == 2)
+		{
+			Pwm15_Level();
+		}
+		else
+		{
+			Pwm15_Level();
+		}
 	}
 }
 /**
