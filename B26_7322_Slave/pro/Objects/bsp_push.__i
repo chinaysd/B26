@@ -1,1 +1,0 @@
-"..\bsp\bsp_push.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\TimeOut;..\user) DEBUG OBJECTEXTEND PRINT(.\Listings\bsp_push.lst) TABS (7) OBJECT(.\Objects\bsp_push.obj)

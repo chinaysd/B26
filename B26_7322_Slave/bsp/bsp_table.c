@@ -7,6 +7,11 @@ void TableKeyInit(void)
 	  P0PH    |= 0X01;
 }
 
+void TableDelayRuningOpen(void)
+{
+	
+}
+
 unsigned char TableReturnValue(void)
 {
 	if(TABLE_DOWN == TableKeyPin)

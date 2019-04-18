@@ -1,7 +1,14 @@
----- TableReturnValue Matches (6 in 3 files) ----
-bsp_table.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):unsigned char TableReturnValue(void)
-bsp_table.h (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):unsigned char TableReturnValue(void);
-system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):				           if(TableReturnValue() == TABLE_ENABLE){
-system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):				           if(TableReturnValue() == TABLE_ENABLE){
-system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):					    if(TableReturnValue() == TABLE_ENABLE){
-system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):	 if(TableReturnValue() == TABLE_DISABLE)
+---- TableOnlyOneInputFlag Matches (13 in 2 files) ----
+bsp_timer.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):extern unsigned char TableOnlyOneInputFlag;
+bsp_timer.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\bsp):    if(TableOnlyOneInputFlag)
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):unsigned char TableOnlyOneInputFlag,TableOnlyTwoInputFlag;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):							TableOnlyOneInputFlag = 0;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):							TableOnlyOneInputFlag = 0;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):							TableOnlyOneInputFlag = 0;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):							TableOnlyOneInputFlag = 0;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):	 	if(!TableOnlyOneInputFlag)
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):			TableOnlyOneInputFlag =1;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):		if(!TableOnlyOneInputFlag)
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):			TableOnlyOneInputFlag  = 1;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):			//TableOnlyOneInputFlag = 0;
+system.c (C:\Users\Administrator\Desktop\B26\B26_7322_Slave\user):	 	TableOnlyOneInputFlag = 0;

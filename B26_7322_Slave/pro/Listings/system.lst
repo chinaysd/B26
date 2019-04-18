@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 1   
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SYSTEM
@@ -28,318 +28,352 @@ line level    source
   18   1             Key_Init();
   19   1             Timer_Init();
   20   1             Uart_Init();
-  21   1             EA = 1;
-  22   1      }
-  23          
-  24          void System_Handle(void)
-  25          {
-  26   1             
-  27   1             if((0==(Key_Handle(KEY1_ID)))&&(0==(Key_Handle(KEY2_ID))))
-  28   1             {
-  29   2                     if(Rev_Select())
-  30   2                     {
-  31   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
-  32   3                           memset(&Rev_String,0,sizeof(Rev_String));
-  33   3                           switch (RevData)
-  34   3                           {
-  35   4                                  case 0x0001:     
-  36   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
-  37   4                                                          Send_Byte(0x01);
-  38   4                                                          break;
-  39   4                                   case 0x0002:
-  40   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
-  41   4                                                          Send_Byte(0x02);
-  42   4                                                          break;
-  43   4                                  case 0x0003:
-  44   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
-  45   4                                                          Send_Byte(0x03);
-  46   4                                                          break;
-  47   4                                  case 0x0004:
-  48   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
-  49   4                                                          Send_Byte(0x04);
-  50   4                                                          break;
-  51   4                                  case 0x0005:
-  52   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
-  53   4                                                          Send_Byte(0x05);
-  54   4                                                          break;
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 2   
+  21   1             WDTCON |= 0X10;
+  22   1             EA = 1;
+  23   1      }
+  24          
+  25          void System_Handle(void)
+  26          {
+  27   1             WDTCON |= 0X10;
+  28   1             if((0==(Key_Handle(KEY1_ID)))&&(0==(Key_Handle(KEY2_ID))))
+  29   1             {
+  30   2                     if(Rev_Select())
+  31   2                     {
+  32   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
+  33   3                           memset(&Rev_String,0,sizeof(Rev_String));
+  34   3                           switch (RevData)
+  35   3                           {
+  36   4                                  case 0x0001:     
+  37   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
+  38   4                                                          Send_Byte(0x01);
+  39   4                                                          break;
+  40   4                                   case 0x0002:
+  41   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
+  42   4                                                          Send_Byte(0x02);
+  43   4                                                          break;
+  44   4                                  case 0x0003:
+  45   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
+  46   4                                                          Send_Byte(0x03);
+  47   4                                                          break;
+  48   4                                  case 0x0004:
+  49   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
+  50   4                                                          Send_Byte(0x04);
+  51   4                                                          break;
+  52   4                                  case 0x0005:
+  53   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
+  54   4                                                          Send_Byte(0x05);
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 2   
 
-  55   4                                  case 0x0006:
-  56   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
-  57   4                                                          Send_Byte(0x06);
-  58   4                                                          break;
-  59   4                                  case 0x0007:
-  60   4                                                          if(TableReturnValue() == TABLE_ENABLE){
-  61   5                                                              Push_Handle(PUSHD_ADDR,PUSH_OPEN);
-  62   5                                                              Send_Byte(0x07);
-  63   5                                                          }
-  64   4                                                          break;
-  65   4                                  case 0x0008:
-  66   4                                                          if(TableReturnValue() == TABLE_ENABLE){
-  67   5                                                              Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
-  68   5                                                              Send_Byte(0x08);
-  69   5                                                          }
-  70   4                                                          break;
-  71   4                                  case 0x0009:
-  72   4                                                          PushResetHandle();
-  73   4                                                          break;
-  74   4                                  case 0x000C:
-  75   4                                                          LED_SET(1);
-  76   4                                                          Send_Byte(0x10);
-  77   4                                                          break;
-  78   4                                  case 0x00AA:
-  79   4                                                          LED_SET(0);
-  80   4                                                          Send_Byte(0x20);
-  81   4                                                          break;
-  82   4                                  default:
-  83   4                                                       PushResetBackHandle();
-  84   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
-  85   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
-  86   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
-  87   4                                                       if(TableReturnValue() == TABLE_ENABLE){
-  88   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
-  89   5                                                       TableOnlyOneInputFlag = 0;
-  90   5                                                       TableOnlyOneInputCnts = 0;
-  91   5                                                       }
-  92   4                                                       break;
-  93   4                           }
-  94   3                     }
-  95   2             }
-  96   1             else if((Key_Handle(KEY1_ID)) &&(Key_Handle(KEY2_ID)))
-  97   1             {
-  98   2                    if(Rev_Select())
-  99   2                     {
- 100   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
- 101   3                           memset(&Rev_String,0,sizeof(Rev_String));
- 102   3                           switch (RevData)
- 103   3                           {
- 104   4                                  case 0x0001:     
- 105   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
- 106   4                                                          Send_Byte(0x02);
- 107   4                                                          break;
- 108   4                                   case 0x0002:                                       
- 109   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
- 110   4                                                          Send_Byte(0x01);
- 111   4                                                          break;
- 112   4                                  case 0x0003:
- 113   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
- 114   4                                                          Send_Byte(0x04);
- 115   4                                                          break;
- 116   4                                  case 0x0004:
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 3   
+  55   4                                                          break;
+  56   4                                  case 0x0006:
+  57   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
+  58   4                                                          Send_Byte(0x06);
+  59   4                                                          break;
+  60   4                                  case 0x0007:
+  61   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+  62   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+  63   5                                                                     Send_Byte(0x07);
+  64   5                                                          }
+  65   4                                                          else
+  66   4                                                          {
+  67   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+  68   5                                                          }
+  69   4                                                          break;
+  70   4                                  case 0x0008:
+  71   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+  72   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+  73   5                                                                     Send_Byte(0x08);
+  74   5                                                          }
+  75   4                                                          else
+  76   4                                                          {
+  77   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+  78   5                                                          }
+  79   4                                                          break;
+  80   4                                  case 0x0009:
+  81   4                                                          PushResetHandle();
+  82   4                                                          break;
+  83   4                                  case 0x000C:
+  84   4                                                          LED_SET(1);
+  85   4                                                          Send_Byte(0x10);
+  86   4                                                          break;
+  87   4                                  case 0x00AA:
+  88   4                                                          LED_SET(0);
+  89   4                                                          Send_Byte(0x20);
+  90   4                                                          break;
+  91   4                                  default:
+  92   4                                                       PushResetBackHandle();
+  93   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
+  94   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
+  95   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
+  96   4                                                       if(TableReturnValue() == TABLE_ENABLE){
+  97   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
+  98   5                                                       TableOnlyOneInputFlag = 0;
+  99   5                                                       TableOnlyOneInputCnts = 0;
+ 100   5                                                       }
+ 101   4                                                       break;
+ 102   4                           }
+ 103   3                     }
+ 104   2             }
+ 105   1             else if((Key_Handle(KEY1_ID)) &&(Key_Handle(KEY2_ID)))
+ 106   1             {
+ 107   2                    if(Rev_Select())
+ 108   2                     {
+ 109   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
+ 110   3                           memset(&Rev_String,0,sizeof(Rev_String));
+ 111   3                           switch (RevData)
+ 112   3                           {
+ 113   4                                  case 0x0001:     
+ 114   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
+ 115   4                                                          Send_Byte(0x02);
+ 116   4                                                          break;
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 3   
 
- 117   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
- 118   4                                                          Send_Byte(0x03);
- 119   4                                                          break;
- 120   4                                  case 0x0005:
- 121   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
- 122   4                                                          Send_Byte(0x05);
- 123   4                                                          break;
- 124   4                                  case 0x0006:
- 125   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
- 126   4                                                          Send_Byte(0x06);
- 127   4                                                          break;
- 128   4                                  case 0x0007:
- 129   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 130   5                                                              Push_Handle(PUSHD_ADDR,PUSH_OPEN);
- 131   5                                                              Send_Byte(0x07);
- 132   5                                                          }
- 133   4                                                          break;
- 134   4                                  case 0x0008:
- 135   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 136   5                                                              Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
- 137   5                                                              Send_Byte(0x08);
- 138   5                                                          }
- 139   4                                                          break;
- 140   4                                  case 0x0009:
- 141   4                                                          PushResetHandle();
- 142   4                                                          break;
- 143   4                                  case 0x000C:
- 144   4                                                          LED_SET(1);
- 145   4                                                          break;
- 146   4                                  case 0x00AA:
- 147   4                                                          LED_SET(0);
- 148   4                                                          break;
- 149   4                                  default:
- 150   4                                                       PushResetBackHandle();
- 151   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
- 152   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
- 153   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
- 154   4                                                       if(TableReturnValue() == TABLE_ENABLE){
- 155   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
- 156   5                                                       TableOnlyOneInputFlag = 0;
- 157   5                                                       TableOnlyOneInputCnts = 0;
- 158   5                                                       }
- 159   4                                                       break;
- 160   4                           }
- 161   3                     }
- 162   2             }
- 163   1             else if(    (1    ==   (Key_Handle(KEY1_ID)))   &&      (0    ==   (Key_Handle(KEY2_ID)))          )
- 164   1             {
- 165   2                    if(Rev_Select())
- 166   2                     {
- 167   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
- 168   3                           memset(&Rev_String,0,sizeof(Rev_String));
- 169   3                           switch (RevData)
- 170   3                           {
- 171   4                                  case 0x0001:     
- 172   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
- 173   4                                                          Send_Byte(0x02);
- 174   4                                                          break;
- 175   4                                   case 0x0002:
- 176   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
- 177   4                                                          Send_Byte(0x01);
- 178   4                                                          break;
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 4   
+ 117   4                                   case 0x0002:                                       
+ 118   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
+ 119   4                                                          Send_Byte(0x01);
+ 120   4                                                          break;
+ 121   4                                  case 0x0003:
+ 122   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
+ 123   4                                                          Send_Byte(0x04);
+ 124   4                                                          break;
+ 125   4                                  case 0x0004:
+ 126   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
+ 127   4                                                          Send_Byte(0x03);
+ 128   4                                                          break;
+ 129   4                                  case 0x0005:
+ 130   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
+ 131   4                                                          Send_Byte(0x05);
+ 132   4                                                          break;
+ 133   4                                  case 0x0006:
+ 134   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
+ 135   4                                                          Send_Byte(0x06);
+ 136   4                                                          break;
+ 137   4                                  case 0x0007:
+ 138   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 139   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+ 140   5                                                                     Send_Byte(0x07);
+ 141   5                                                          }
+ 142   4                                                          else
+ 143   4                                                          {
+ 144   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 145   5                                                          }
+ 146   4                                                          break;
+ 147   4                                  case 0x0008:
+ 148   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 149   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+ 150   5                                                                     Send_Byte(0x08);
+ 151   5                                                          }
+ 152   4                                                          else
+ 153   4                                                          {
+ 154   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 155   5                                                          }
+ 156   4                                                          break;
+ 157   4                                  case 0x0009:
+ 158   4                                                          PushResetHandle();
+ 159   4                                                          break;
+ 160   4                                  case 0x000C:
+ 161   4                                                          LED_SET(1);
+ 162   4                                                          break;
+ 163   4                                  case 0x00AA:
+ 164   4                                                          LED_SET(0);
+ 165   4                                                          break;
+ 166   4                                  default:
+ 167   4                                                       PushResetBackHandle();
+ 168   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
+ 169   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
+ 170   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
+ 171   4                                                       if(TableReturnValue() == TABLE_ENABLE){
+ 172   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 173   5                                                       TableOnlyOneInputFlag = 0;
+ 174   5                                                       TableOnlyOneInputCnts = 0;
+ 175   5                                                       }
+ 176   4                                                       break;
+ 177   4                           }
+ 178   3                     }
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 4   
 
- 179   4                                  case 0x0003:
- 180   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
- 181   4                                                          Send_Byte(0x03);
- 182   4                                                          break;
- 183   4                                  case 0x0004:
- 184   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
- 185   4                                                          Send_Byte(0x04);
- 186   4                                                          break;
- 187   4                                  case 0x0005:
- 188   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
- 189   4                                                          Send_Byte(0x05);
- 190   4                                                          break;
- 191   4                                  case 0x0006:
- 192   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
- 193   4                                                          Send_Byte(0x06);
- 194   4                                                          break;
- 195   4                                  case 0x0007:
- 196   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 197   5                                                              Push_Handle(PUSHD_ADDR,PUSH_OPEN);
- 198   5                                                              Send_Byte(0x07);
- 199   5                                                          }
- 200   4                                                          break;
- 201   4                                  case 0x0008:
- 202   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 203   5                                                              Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
- 204   5                                                              Send_Byte(0x08);
- 205   5                                                          }
- 206   4                                                          break;
- 207   4                                  case 0x0009:
- 208   4                                                          PushResetHandle();
- 209   4                                                          break;
- 210   4                                  case 0x000C:
- 211   4                                                          LED_SET(1);
- 212   4                                                          break;
- 213   4                                  case 0x00AA:
- 214   4                                                          LED_SET(0);
- 215   4                                                          break;
- 216   4                                  default:
- 217   4                                                       PushResetBackHandle();
- 218   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
- 219   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
- 220   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
- 221   4                                                       if(TableReturnValue() == TABLE_ENABLE){
- 222   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
- 223   5                                                       TableOnlyOneInputFlag = 0;
- 224   5                                                       TableOnlyOneInputCnts = 0;
- 225   5                                                       }
- 226   4                                                       break;
- 227   4                           }
- 228   3                     }
- 229   2             }
- 230   1             else if(    (0    ==   (Key_Handle(KEY1_ID)))   &&      (1    ==   (Key_Handle(KEY2_ID)))          )
- 231   1             {
- 232   2                    if(Rev_Select())
- 233   2                     {
- 234   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
- 235   3                           memset(&Rev_String,0,sizeof(Rev_String));
- 236   3                           switch (RevData)
- 237   3                           {
- 238   4                                  case 0x0001:     
- 239   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
- 240   4                                                          Send_Byte(0x01);
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 5   
+ 179   2             }
+ 180   1             else if(    (1    ==   (Key_Handle(KEY1_ID)))   &&      (0    ==   (Key_Handle(KEY2_ID)))          )
+ 181   1             {
+ 182   2                    if(Rev_Select())
+ 183   2                     {
+ 184   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
+ 185   3                           memset(&Rev_String,0,sizeof(Rev_String));
+ 186   3                           switch (RevData)
+ 187   3                           {
+ 188   4                                  case 0x0001:     
+ 189   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
+ 190   4                                                          Send_Byte(0x02);
+ 191   4                                                          break;
+ 192   4                                   case 0x0002:
+ 193   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
+ 194   4                                                          Send_Byte(0x01);
+ 195   4                                                          break;
+ 196   4                                  case 0x0003:
+ 197   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
+ 198   4                                                          Send_Byte(0x03);
+ 199   4                                                          break;
+ 200   4                                  case 0x0004:
+ 201   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
+ 202   4                                                          Send_Byte(0x04);
+ 203   4                                                          break;
+ 204   4                                  case 0x0005:
+ 205   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
+ 206   4                                                          Send_Byte(0x05);
+ 207   4                                                          break;
+ 208   4                                  case 0x0006:
+ 209   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
+ 210   4                                                          Send_Byte(0x06);
+ 211   4                                                          break;
+ 212   4                                  case 0x0007:
+ 213   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 214   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+ 215   5                                                                     Send_Byte(0x07);
+ 216   5                                                          }
+ 217   4                                                          else
+ 218   4                                                          {
+ 219   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 220   5                                                          }
+ 221   4                                                          break;
+ 222   4                                  case 0x0008:
+ 223   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 224   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+ 225   5                                                                     Send_Byte(0x08);
+ 226   5                                                          }
+ 227   4                                                          else
+ 228   4                                                          {
+ 229   5                                                              Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 230   5                                                          }
+ 231   4                                                          break;
+ 232   4                                  case 0x0009:
+ 233   4                                                          PushResetHandle();
+ 234   4                                                          break;
+ 235   4                                  case 0x000C:
+ 236   4                                                          LED_SET(1);
+ 237   4                                                          break;
+ 238   4                                  case 0x00AA:
+ 239   4                                                          LED_SET(0);
+ 240   4                                                          break;
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 5   
 
- 241   4                                                          break;
- 242   4                                   case 0x0002:
- 243   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
- 244   4                                                          Send_Byte(0x02);
- 245   4                                                          break;
- 246   4                                  case 0x0003:
- 247   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
- 248   4                                                          Send_Byte(0x04);
- 249   4                                                          break;
- 250   4                                  case 0x0004:
- 251   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
- 252   4                                                          Send_Byte(0x03);
- 253   4                                                          break;
- 254   4                                  case 0x0005:
- 255   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
- 256   4                                                          Send_Byte(0x05);
- 257   4                                                          break;
- 258   4                                  case 0x0006:
- 259   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
- 260   4                                                          Send_Byte(0x06);
- 261   4                                                          break;
- 262   4                                  case 0x0007:
- 263   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 264   5                                                              Push_Handle(PUSHD_ADDR,PUSH_OPEN);
- 265   5                                                              Send_Byte(0x07);
- 266   5                                                          }
- 267   4                                                          break;
- 268   4                                  case 0x0008:
- 269   4                                                          if(TableReturnValue() == TABLE_ENABLE){
- 270   5                                                              Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
- 271   5                                                              Send_Byte(0x08);
- 272   5                                                          }
- 273   4                                                          break;
- 274   4                                  case 0x0009:
- 275   4                                                          PushResetHandle();
- 276   4                                                          break;
- 277   4                                  case 0x000C:
- 278   4                                                          LED_SET(1);
- 279   4                                                          break;
- 280   4                                  case 0x00AA:
- 281   4                                                          LED_SET(0);
+ 241   4                                  default:
+ 242   4                                                       PushResetBackHandle();
+ 243   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
+ 244   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
+ 245   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
+ 246   4                                                       if(TableReturnValue() == TABLE_ENABLE){
+ 247   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 248   5                                                       TableOnlyOneInputFlag = 0;
+ 249   5                                                       TableOnlyOneInputCnts = 0;
+ 250   5                                                       }
+ 251   4                                                       break;
+ 252   4                           }
+ 253   3                     }
+ 254   2             }
+ 255   1             else if(    (0    ==   (Key_Handle(KEY1_ID)))   &&      (1    ==   (Key_Handle(KEY2_ID)))          )
+ 256   1             {
+ 257   2                    if(Rev_Select())
+ 258   2                     {
+ 259   3                           RevData = (unsigned int)(Get32Bit(Rev_String[2],Rev_String[3]));
+ 260   3                           memset(&Rev_String,0,sizeof(Rev_String));
+ 261   3                           switch (RevData)
+ 262   3                           {
+ 263   4                                  case 0x0001:     
+ 264   4                                                          Push_Handle(PUSHA_ADDR,PUSH_OPEN);
+ 265   4                                                          Send_Byte(0x01);
+ 266   4                                                          break;
+ 267   4                                   case 0x0002:
+ 268   4                                                          Push_Handle(PUSHA_ADDR,PUSH_CLOSE);
+ 269   4                                                          Send_Byte(0x02);
+ 270   4                                                          break;
+ 271   4                                  case 0x0003:
+ 272   4                                                          Push_Handle(PUSHB_ADDR,PUSH_CLOSE);
+ 273   4                                                          Send_Byte(0x04);
+ 274   4                                                          break;
+ 275   4                                  case 0x0004:
+ 276   4                                                          Push_Handle(PUSHB_ADDR,PUSH_OPEN);
+ 277   4                                                          Send_Byte(0x03);
+ 278   4                                                          break;
+ 279   4                                  case 0x0005:
+ 280   4                                                          Push_Handle(PUSHC_ADDR,PUSH_OPEN);
+ 281   4                                                          Send_Byte(0x05);
  282   4                                                          break;
- 283   4                                  default:
- 284   4                                                       PushResetBackHandle();
- 285   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
- 286   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
- 287   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
- 288   4                                                       if(TableReturnValue() == TABLE_ENABLE){
- 289   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
- 290   5                                                       TableOnlyOneInputFlag = 0;
- 291   5                                                       TableOnlyOneInputCnts = 0;
- 292   5                                                       TableOnlyTwoInputFlag = 0;
- 293   5                                                       }
- 294   4                                                       break;
- 295   4                           }
- 296   3                     }
- 297   2             }
- 298   1              
- 299   1              #if 1
- 300   1              if(TableReturnValue() == TABLE_DISABLE)
- 301   1              {
- 302   2                    #if 1
-C51 COMPILER V9.59.0.0   SYSTEM                                                            04/16/2019 17:25:33 PAGE 6   
+ 283   4                                  case 0x0006:
+ 284   4                                                          Push_Handle(PUSHC_ADDR,PUSH_CLOSE);
+ 285   4                                                          Send_Byte(0x06);
+ 286   4                                                          break;
+ 287   4                                  case 0x0007:
+ 288   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 289   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+ 290   5                                                                     Send_Byte(0x07);
+ 291   5                                                          }
+ 292   4                                                          else
+ 293   4                                                          {
+ 294   5                                                                    Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 295   5                                                                    //Send_Byte(0x0aa);
+ 296   5                                                          }
+ 297   4                                                          break;
+ 298   4                                  case 0x0008:
+ 299   4                                                          if(TableReturnValue() == TABLE_ENABLE){
+ 300   5                                                                     Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+ 301   5                                                                     Send_Byte(0x08);
+ 302   5                                                          }
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 6   
 
- 303   2                    if(!TableOnlyOneInputFlag)
- 304   2                    {
- 305   3                           TableOnlyOneInputFlag =1;
- 306   3                           TimeOut_Record(&TimeOut_Para[2],4000);
- 307   3                           Push_Handle(PUSHD_ADDR,PUSH_STOP);
- 308   3                    }
- 309   2                    if(TimeOutDet_Check(&TimeOut_Para[2]))
- 310   2                    {
- 311   3                           Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
- 312   3                           if(!TableOnlyTwoInputFlag)
- 313   3                           {
- 314   4                                  TableOnlyTwoInputFlag = 1;
- 315   4                                  TimeOut_Record(&TimeOut_Para[3],14000);
- 316   4                           }
- 317   3                           if(TimeOutDet_Check(&TimeOut_Para[3]))
- 318   3                           {
- 319   4                                  Push_Handle(PUSHD_ADDR,PUSH_STOP);
- 320   4                           }
- 321   3                    }
- 322   2                    #else
+ 303   4                                                          else
+ 304   4                                                          {
+ 305   5                                                                    Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 306   5                                                          }
+ 307   4                                                          break;
+ 308   4                                  case 0x0009:
+ 309   4                                                          PushResetHandle();
+ 310   4                                                          break;
+ 311   4                                  case 0x000C:
+ 312   4                                                          LED_SET(1);
+ 313   4                                                          break;
+ 314   4                                  case 0x00AA:
+ 315   4                                                          LED_SET(0);
+ 316   4                                                          break;
+ 317   4                                  default:
+ 318   4                                                       PushResetBackHandle();
+ 319   4                                                       Push_Handle(PUSHA_ADDR,PUSH_STOP);
+ 320   4                                                       Push_Handle(PUSHB_ADDR,PUSH_STOP);
+ 321   4                                                       Push_Handle(PUSHC_ADDR,PUSH_STOP);
+ 322   4                                                       if(TableReturnValue() == TABLE_ENABLE){
+ 323   5                                                       Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 324   5                                                       TableOnlyOneInputFlag = 0;
+ 325   5                                                       TableOnlyOneInputCnts = 0;
+ 326   5                                                       TableOnlyTwoInputFlag = 0;
+ 327   5                                                       }
+ 328   4                                                       break;
+ 329   4                           }
+ 330   3                     }
+ 331   2             }
+ 332   1              
+ 333   1              #if 1
+ 334   1              if(TableReturnValue() == TABLE_DISABLE)
+ 335   1              {
+ 336   2                    #if 1
+ 337   2                    if(!TableOnlyOneInputFlag)
+ 338   2                    {
+ 339   3                           TableOnlyOneInputFlag =1;
+ 340   3                           TimeOut_Record(&TimeOut_Para[2],4000);
+ 341   3                           Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 342   3                    }
+ 343   2                    if(TimeOutDet_Check(&TimeOut_Para[2]))
+ 344   2                    {
+ 345   3                           Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+ 346   3                           if(!TableOnlyTwoInputFlag)
+ 347   3                           {
+ 348   4                                  TableOnlyTwoInputFlag = 1;
+ 349   4                                  TimeOut_Record(&TimeOut_Para[3],14000);
+ 350   4                           }
+ 351   3                           if(TimeOutDet_Check(&TimeOut_Para[3]))
+ 352   3                           {
+ 353   4                                  Push_Handle(PUSHD_ADDR,PUSH_STOP);
+ 354   4                           }
+ 355   3                    }
+ 356   2                    #else
                             if(!TableOnlyOneInputFlag)
                             {
                                    TableOnlyOneInputFlag  = 1;
@@ -348,27 +382,29 @@ line level    source
               
                             }
                             if(TableOnlyOneInputCnts > 15000)
+C51 COMPILER V9.59.0.0   SYSTEM                                                            04/18/2019 15:26:57 PAGE 7   
+
                            {
                                    TableOnlyOneInputCnts = 0;
                                    //TableOnlyOneInputFlag = 0;
                                    Push_Handle(PUSHD_ADDR,PUSH_STOP);
                             }
                             #endif
- 337   2              }
- 338   1              else
- 339   1              {
- 340   2                    TableOnlyOneInputFlag = 0;
- 341   2                    TableOnlyOneInputCnts = 0;
- 342   2                    TableOnlyTwoInputFlag = 0;
- 343   2              }
- 344   1              #endif
- 345   1      }
- 346          
- 347          
+ 371   2              }
+ 372   1              else
+ 373   1              {
+ 374   2                    TableOnlyOneInputFlag = 0;
+ 375   2                    TableOnlyOneInputCnts = 0;
+ 376   2                    TableOnlyTwoInputFlag = 0;
+ 377   2              }
+ 378   1              #endif
+ 379   1      }
+ 380          
+ 381          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1270    ----
+   CODE SIZE        =   1281    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

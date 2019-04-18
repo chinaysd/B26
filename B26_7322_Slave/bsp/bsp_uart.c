@@ -77,6 +77,12 @@ static void Rev_Handle(void)
 			{
 				Rev_String[Rev_Num] = Rev_Data;
 				Rev_Num ++;
+				#if 0
+				if(Rev_String[4] != (unsigned char)(Rev_String[0]+Rev_String[1]+Rev_String[2]+Rev_String[3]))
+				{
+					Rev_Num = 0x00;
+				}
+				#endif
 				if(Rev_String[0] != 0xfa)
 				{
 					Rev_Num = 0x00;

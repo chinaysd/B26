@@ -18,12 +18,13 @@ void System_Init(void)
        Key_Init();
 	Timer_Init();
 	Uart_Init();
+	WDTCON |= 0X10;
 	EA = 1;
 }
 
 void System_Handle(void)
 {
-	
+	WDTCON |= 0X10;
 	if((0==(Key_Handle(KEY1_ID)))&&(0==(Key_Handle(KEY2_ID))))
 	{
 		 if(Rev_Select())
@@ -58,14 +59,22 @@ void System_Handle(void)
 							   break;
 				case 0x0007:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_OPEN);
-								Send_Byte(0x07);
+									Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+								       Send_Byte(0x07);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0008:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
-								Send_Byte(0x08);
+									Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+								       Send_Byte(0x08);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0009:
@@ -127,14 +136,22 @@ void System_Handle(void)
 							   break;
 				case 0x0007:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_OPEN);
-								Send_Byte(0x07);
+									Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+								       Send_Byte(0x07);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0008:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
-								Send_Byte(0x08);
+									Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+								       Send_Byte(0x08);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0009:
@@ -194,14 +211,22 @@ void System_Handle(void)
 							   break;
 				case 0x0007:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_OPEN);
-								Send_Byte(0x07);
+									Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+								       Send_Byte(0x07);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0008:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
-								Send_Byte(0x08);
+									Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+								       Send_Byte(0x08);
+							   }
+							   else
+							   {
+							   	Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0009:
@@ -261,14 +286,23 @@ void System_Handle(void)
 							   break;
 				case 0x0007:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_OPEN);
-								Send_Byte(0x07);
+									Push_Handle(PUSHD_ADDR,PUSH_OPEN);
+								       Send_Byte(0x07);
+							   }
+							   else
+							   {
+							   	      Push_Handle(PUSHD_ADDR,PUSH_STOP);
+								      //Send_Byte(0x0aa);
 							   }
 							   break;
 				case 0x0008:
 							   if(TableReturnValue() == TABLE_ENABLE){
-								Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
-								Send_Byte(0x08);
+									Push_Handle(PUSHD_ADDR,PUSH_CLOSE);
+								       Send_Byte(0x08);
+							   }
+							   else
+							   {
+							   	      Push_Handle(PUSHD_ADDR,PUSH_STOP);
 							   }
 							   break;
 				case 0x0009:
