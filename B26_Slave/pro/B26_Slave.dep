@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>2</fileVersion>
-    <fileChecksum>1042816445</fileChecksum>
+    <fileChecksum>2362976070</fileChecksum>
     <configuration>
         <name>Debug</name>
         <outputs>
@@ -105,6 +105,10 @@
             <file>$PROJ_DIR$\Debug\Obj\bsp_warm.pbi</file>
             <file>$PROJ_DIR$\Debug\Obj\bsp_warm.o</file>
             <file>$PROJ_DIR$\..\bsp\bsp_warm.h</file>
+            <file>$PROJ_DIR$\..\bsp\bsp_key.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\bsp_key.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\bsp_key.pbi</file>
+            <file>$PROJ_DIR$\..\bsp\bsp_key.c</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
@@ -153,11 +157,11 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 69 67 44 66 68 70 60 26 96 71 63 62 64 61 46 27 30 65 72 73 74 75 76 77 78 79 32 29 31 28 95 17 89 22 99 25 24 23</file>
+                    <file> 69 60 67 22 28 66 68 70 31 96 71 63 62 64 61 17 95 29 65 72 73 74 75 76 77 78 79 89 99 27 30 44 46 32 26 100 25 24 23</file>
                 </tool>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 95 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 96 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99</file>
+                    <file> 95 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 96 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 100</file>
                 </tool>
             </inputs>
         </file>
@@ -176,11 +180,11 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 60 26 24 96 44 73 31 77 25 28 75 46 65 72 74 76 78 79 32 30 27 71 66 63 67 62 68 64 69 61 70 17 89 22 99 95 29 23</file>
+                    <file> 74 60 96 65 78 27 44 72 76 79 32 29 28 73 75 77 46 26 100 23 71 66 63 67 62 68 64 69 61 70 17 89 22 99 95 25 24 30 31</file>
                 </tool>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 96 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 95</file>
+                    <file> 96 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 95 100</file>
                 </tool>
             </inputs>
         </file>
@@ -455,8 +459,12 @@
             </outputs>
             <inputs>
                 <tool>
+                    <name>BICOMP</name>
+                    <file> 63 60 96 64 17 29 28 71 62 61 95 66 67 68 69 70 22 31 44 65 72 73 74 75 76 77 78 79 89 99 27 30 46 32 26 100 25 24 23</file>
+                </tool>
+                <tool>
                     <name>ICCSTM8</name>
-                    <file> 96 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 95</file>
+                    <file> 96 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 95 100</file>
                 </tool>
             </inputs>
         </file>
@@ -479,11 +487,11 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 64 60 63 71 62 61 22 27 66 67 68 69 70 17 95 28 44 65 72 73 74 75 76 77 78 79 89 99 25 24 23 96 41 46 32 26 29 30 31</file>
+                    <file> 24 60 64 25 96 63 32 71 62 61 28 23 66 67 68 69 70 44 65 72 73 74 75 76 77 78 79 46 26 100 27 41 17 89 22 99 95 29 30 31</file>
                 </tool>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 41 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 96 95</file>
+                    <file> 41 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 44 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 96 95 100</file>
                 </tool>
             </inputs>
         </file>
@@ -506,11 +514,11 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 76 60 89 72 79 99 65 74 78 27 17 22 95 73 75 77 28 46 32 26 96 71 66 63 67 62 68 64 69 61 70 25 24 23 44 29 30 31</file>
+                    <file> 68 24 25 60 96 89 66 70 99 67 69 28 23 17 22 95 71 63 62 64 61 46 32 26 100 65 72 73 74 75 76 77 78 79 27 44 29 30 31</file>
                 </tool>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 44 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 96 95</file>
+                    <file> 44 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71 17 46 89 32 22 26 28 27 29 30 31 24 23 25 99 96 95 100</file>
                 </tool>
             </inputs>
         </file>
@@ -529,7 +537,30 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 56 87 91 93 20 90 34 98 35 59 51 36 50 49 48 47 42 18 54 55</file>
+                    <file> 56 101 87 91 93 20 90 34 98 35 59 51 36 50 49 48 47 42 18 54 55</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\bsp\bsp_key.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 102</file>
+                </tool>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 101</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 78 65 74 60 72 76 79 73 75 77 71 66 63 67 62 68 64 69 61 70 100</file>
+                </tool>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 100 60 65 66 72 63 73 67 74 62 75 68 76 64 77 69 78 61 70 79 71</file>
                 </tool>
             </inputs>
         </file>

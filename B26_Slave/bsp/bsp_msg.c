@@ -52,77 +52,299 @@ static MSG_STATUS Msg_Scanf(void)
 
 void Msg_Function(unsigned char GetValue)
 {
-	if(GetValue == Msg_NonValue)
+	if((0 == Key5_Down(Key5_PORT,Key5_PIN))&&(0 == Key6_Down(Key6_PORT,Key6_PIN)))
 	{
-		PushControl(PUSHA_ADDR,PushStop);
-		PushControl(PUSHB_ADDR,PushStop);
-		PushControl(PUSHC_ADDR,PushStop);
-		PushControl(PUSHD_ADDR,PushStop);
-		Reset_EndHandle();
+		if(GetValue == Msg_NonValue)
+		{
+			PushControl(PUSHA_ADDR,PushStop);
+			PushControl(PUSHB_ADDR,PushStop);
+			PushControl(PUSHC_ADDR,PushStop);
+			PushControl(PUSHD_ADDR,PushStop);
+			Reset_EndHandle();
+		}
+		else if(GetValue == Msg_PushAOpen)
+		{
+			PushControl(PUSHA_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushAClose)
+		{
+			PushControl(PUSHA_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushBOpen)
+		{
+			PushControl(PUSHB_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushBClose)
+		{
+			PushControl(PUSHB_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushCOpen)
+		{
+			PushControl(PUSHC_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCClose)
+		{
+			PushControl(PUSHC_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushDOpen)
+		{
+			PushControl(PUSHD_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushDClose)
+		{
+			PushControl(PUSHD_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushRegister)
+		{
+			PushReset_Control(PushReset);
+		}
+		else if(GetValue == Msg_WarmOpen)
+		{
+			Warm_Handle(WARM_OPEN);
+		}
+		else if(GetValue == Msg_WarmClose)
+		{
+			Warm_Handle(WARM_CLOSE);
+		}
+		else if(GetValue == Msg_Led1Open)
+		{
+			LED1_SET(1);
+		}
+		else if(GetValue == Msg_Led1Close)
+		{
+			LED1_SET(0);
+		}
+		else if(GetValue == Msg_MassOpen)
+		{
+			Mass_HandleRe(Msg_MassOpen);
+		}
+		else if(GetValue == Msg_MassClose)
+		{
+			Mass_HandleRe(Msg_MassClose);
+		}
+		Reset_BackHandle();
+		Mass_BackHandle();
 	}
-	else if(GetValue == Msg_PushAOpen)
+	else if(Key5_Down(Key5_PORT,Key5_PIN)&&Key6_Down(Key6_PORT,Key6_PIN))
 	{
-		PushControl(PUSHA_ADDR,PushOpen);
+		if(GetValue == Msg_NonValue)
+		{
+			PushControl(PUSHA_ADDR,PushStop);
+			PushControl(PUSHB_ADDR,PushStop);
+			PushControl(PUSHC_ADDR,PushStop);
+			PushControl(PUSHD_ADDR,PushStop);
+			Reset_EndHandle();
+		}
+		else if(GetValue == Msg_PushAOpen)
+		{
+			PushControl(PUSHA_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushAClose)
+		{
+			PushControl(PUSHA_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushBOpen)
+		{
+			PushControl(PUSHB_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushBClose)
+		{
+			PushControl(PUSHB_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCOpen)
+		{
+			PushControl(PUSHC_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCClose)
+		{
+			PushControl(PUSHC_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushDOpen)
+		{
+			PushControl(PUSHD_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushDClose)
+		{
+			PushControl(PUSHD_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushRegister)
+		{
+			PushReset_Control(PushReset);
+		}
+		else if(GetValue == Msg_WarmOpen)
+		{
+			Warm_Handle(WARM_OPEN);
+		}
+		else if(GetValue == Msg_WarmClose)
+		{
+			Warm_Handle(WARM_CLOSE);
+		}
+		else if(GetValue == Msg_Led1Open)
+		{
+			LED1_SET(1);
+		}
+		else if(GetValue == Msg_Led1Close)
+		{
+			LED1_SET(0);
+		}
+		else if(GetValue == Msg_MassOpen)
+		{
+			Mass_HandleRe(Msg_MassOpen);
+		}
+		else if(GetValue == Msg_MassClose)
+		{
+			Mass_HandleRe(Msg_MassClose);
+		}
+		Reset_BackHandle();
+		Mass_BackHandle();
 	}
-	else if(GetValue == Msg_PushAClose)
+	else if((0 == Key5_Down(Key5_PORT,Key5_PIN))&&Key6_Down(Key6_PORT,Key6_PIN))
 	{
-		PushControl(PUSHA_ADDR,PushClose);
+		if(GetValue == Msg_NonValue)
+		{
+			PushControl(PUSHA_ADDR,PushStop);
+			PushControl(PUSHB_ADDR,PushStop);
+			PushControl(PUSHC_ADDR,PushStop);
+			PushControl(PUSHD_ADDR,PushStop);
+			Reset_EndHandle();
+		}
+		else if(GetValue == Msg_PushAOpen)
+		{
+			PushControl(PUSHA_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushAClose)
+		{
+			PushControl(PUSHA_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushBOpen)
+		{
+			PushControl(PUSHB_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushBClose)
+		{
+			PushControl(PUSHB_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushCOpen)
+		{
+			PushControl(PUSHC_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCClose)
+		{
+			PushControl(PUSHC_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushDOpen)
+		{
+			PushControl(PUSHD_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushDClose)
+		{
+			PushControl(PUSHD_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushRegister)
+		{
+			PushReset_Control(PushReset);
+		}
+		else if(GetValue == Msg_WarmOpen)
+		{
+			Warm_Handle(WARM_OPEN);
+		}
+		else if(GetValue == Msg_WarmClose)
+		{
+			Warm_Handle(WARM_CLOSE);
+		}
+		else if(GetValue == Msg_Led1Open)
+		{
+			LED1_SET(1);
+		}
+		else if(GetValue == Msg_Led1Close)
+		{
+			LED1_SET(0);
+		}
+		else if(GetValue == Msg_MassOpen)
+		{
+			Mass_HandleRe(Msg_MassOpen);
+		}
+		else if(GetValue == Msg_MassClose)
+		{
+			Mass_HandleRe(Msg_MassClose);
+		}
+		Reset_BackHandle();
+		Mass_BackHandle();
 	}
-	else if(GetValue == Msg_PushBOpen)
+	else if(Key5_Down(Key5_PORT,Key5_PIN)&&(0== Key6_Down(Key6_PORT,Key6_PIN)))
 	{
-		PushControl(PUSHB_ADDR,PushOpen);
+		if(GetValue == Msg_NonValue)
+		{
+			PushControl(PUSHA_ADDR,PushStop);
+			PushControl(PUSHB_ADDR,PushStop);
+			PushControl(PUSHC_ADDR,PushStop);
+			PushControl(PUSHD_ADDR,PushStop);
+			Reset_EndHandle();
+		}
+		else if(GetValue == Msg_PushAOpen)
+		{
+			PushControl(PUSHA_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushAClose)
+		{
+			PushControl(PUSHA_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushBOpen)
+		{
+			PushControl(PUSHB_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushBClose)
+		{
+			PushControl(PUSHB_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCOpen)
+		{
+			PushControl(PUSHC_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushCClose)
+		{
+			PushControl(PUSHC_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushDOpen)
+		{
+			PushControl(PUSHD_ADDR,PushOpen);
+		}
+		else if(GetValue == Msg_PushDClose)
+		{
+			PushControl(PUSHD_ADDR,PushClose);
+		}
+		else if(GetValue == Msg_PushRegister)
+		{
+			PushReset_Control(PushReset);
+		}
+		else if(GetValue == Msg_WarmOpen)
+		{
+			Warm_Handle(WARM_OPEN);
+		}
+		else if(GetValue == Msg_WarmClose)
+		{
+			Warm_Handle(WARM_CLOSE);
+		}
+		else if(GetValue == Msg_Led1Open)
+		{
+			LED1_SET(1);
+		}
+		else if(GetValue == Msg_Led1Close)
+		{
+			LED1_SET(0);
+		}
+		else if(GetValue == Msg_MassOpen)
+		{
+			Mass_HandleRe(Msg_MassOpen);
+		}
+		else if(GetValue == Msg_MassClose)
+		{
+			Mass_HandleRe(Msg_MassClose);
+		}
+		Reset_BackHandle();
+		Mass_BackHandle();
 	}
-	else if(GetValue == Msg_PushBClose)
-	{
-		PushControl(PUSHB_ADDR,PushClose);
-	}
-
-	else if(GetValue == Msg_PushCOpen)
-	{
-		PushControl(PUSHC_ADDR,PushOpen);
-	}
-	else if(GetValue == Msg_PushCClose)
-	{
-		PushControl(PUSHC_ADDR,PushClose);
-	}
-	else if(GetValue == Msg_PushDOpen)
-	{
-		PushControl(PUSHD_ADDR,PushOpen);
-	}
-	else if(GetValue == Msg_PushDClose)
-	{
-		PushControl(PUSHD_ADDR,PushClose);
-	}
-	else if(GetValue == Msg_PushRegister)
-	{
-		PushReset_Control(PushReset);
-	}
-	else if(GetValue == Msg_WarmOpen)
-	{
-		Warm_Handle(WARM_OPEN);
-	}
-	else if(GetValue == Msg_WarmClose)
-	{
-		Warm_Handle(WARM_CLOSE);
-	}
-	else if(GetValue == Msg_Led1Open)
-	{
-		LED1_SET(1);
-	}
-	else if(GetValue == Msg_Led1Close)
-	{
-		LED1_SET(0);
-	}
-	else if(GetValue == Msg_MassOpen)
-	{
-		Mass_HandleRe(Msg_MassOpen);
-	}
-	else if(GetValue == Msg_MassClose)
-	{
-		Mass_HandleRe(Msg_MassClose);
-	}
-	Reset_BackHandle();
-	Mass_BackHandle();
+	
 }
 
 void Msg_Register(void (*Cb)(unsigned char))

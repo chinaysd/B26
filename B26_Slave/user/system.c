@@ -11,6 +11,7 @@ void System_Init(void)
 	Timer_Init();
 	Uart_Init();
 	Mass_Init();
+	Key_Init();
 	Mass_Deinit();
 	Msg_Register(Msg_Function);
 	enableInterrupts(); //¿ªÆôÖÐ¶Ï
