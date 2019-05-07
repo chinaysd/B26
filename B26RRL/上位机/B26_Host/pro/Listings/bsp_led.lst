@@ -1,0 +1,35 @@
+C51 COMPILER V9.59.0.0   BSP_LED                                                           05/07/2019 13:50:34 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_LED
+OBJECT MODULE PLACED IN .\Objects\bsp_led.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\bsp\bsp_led.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\TimeOut;..
+                    -\user) DEBUG OBJECTEXTEND PRINT(.\Listings\bsp_led.lst) TABS(7) OBJECT(.\Objects\bsp_led.obj)
+
+line level    source
+
+   1          #include "bsp_led.h"
+   2          
+   3          
+   4          void Led_Init(void)
+   5          {
+   6   1             P2CON |= 0X20;
+   7   1             P2PH   &= ~0X20;
+   8   1      }
+   9          
+  10          
+  11          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      7    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

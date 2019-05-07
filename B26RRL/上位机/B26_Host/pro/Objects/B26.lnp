@@ -1,0 +1,17 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\system.obj",
+".\Objects\S_TouchKeyCFG.obj",
+"..\lib\SC93F8XXX_HighSensitive_Lib_T1_V0.0.2.LIB",
+".\Objects\bsp_led.obj",
+".\Objects\bsp_timer.obj",
+".\Objects\bsp_uart.obj",
+".\Objects\bsp_key.obj",
+".\Objects\key_port.obj",
+".\Objects\bsp_pwm.obj",
+".\Objects\bsp_motro.obj",
+".\Objects\bsp_lock.obj",
+".\Objects\bsp_wdt.obj",
+".\Objects\TimeOut.obj" 
+TO ".\Objects\B26" 
+PRINT(".\Listings\B26.m51") RAMSIZE(256) 

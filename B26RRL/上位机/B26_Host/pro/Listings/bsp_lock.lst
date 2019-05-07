@@ -1,0 +1,59 @@
+C51 COMPILER V9.59.0.0   BSP_LOCK                                                          05/07/2019 13:50:35 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_LOCK
+OBJECT MODULE PLACED IN .\Objects\bsp_lock.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\bsp\bsp_lock.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\TimeOut;.
+                    -.\user) DEBUG OBJECTEXTEND PRINT(.\Listings\bsp_lock.lst) TABS(7) OBJECT(.\Objects\bsp_lock.obj)
+
+line level    source
+
+   1          #include "bsp_lock.h"
+   2          #include "bsp_pwm.h"
+   3          #include "bsp_key.h"
+   4          
+   5          
+   6          unsigned char Lock_Flag;
+   7          extern unsigned char Pwm_Level;
+   8          extern unsigned char SendBackData;
+   9          
+  10          void Lock_Init(void)
+  11          {
+  12   1             P2CON |= 0X20;
+  13   1             P2PH   &= ~0X20;
+  14   1      }
+  15          
+  16          void Lock_Handle(void)
+  17          {
+  18   1             if(!Lock_Flag)
+  19   1             {
+  20   2                    Lock_Flag = Lock_True;
+  21   2                    RED_SET(1);
+  22   2             }
+  23   1             else
+  24   1             {
+  25   2                    Lock_Flag = Lock_False;
+  26   2                    RED_SET(0);
+  27   2             }
+  28   1      }
+  29          
+  30          
+  31          
+  32          
+  33          
+  34          
+  35          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     23    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

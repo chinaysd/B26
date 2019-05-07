@@ -1,0 +1,85 @@
+C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         05/07/2019 13:50:35 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BSP_MOTRO
+OBJECT MODULE PLACED IN .\Objects\bsp_motro.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\bsp\bsp_motro.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\TimeOut;
+                    -..\user) DEBUG OBJECTEXTEND PRINT(.\Listings\bsp_motro.lst) TABS(7) OBJECT(.\Objects\bsp_motro.obj)
+
+line level    source
+
+   1          #include "bsp_motro.h"
+   2          
+   3          unsigned char UpFlag,DownFlag;
+   4          unsigned int   UpCnts,DownCnts;
+   5          
+   6          void Motro_Init(void)
+   7          {
+   8   1            P0CON  |= 0X06;
+   9   1            P0PH    &= ~0X06;
+  10   1            P0        &= 0X00;
+  11   1      }
+  12          
+  13          void Motro_Handle(void)
+  14          {
+  15   1             static unsigned char MotroTempCnts;
+  16   1             ++ MotroTempCnts;
+  17   1             if(MotroTempCnts & 0x01)
+  18   1             {
+  19   2                     P0 &= 0Xf9;
+  20   2                     P0 |= 1 << 1;
+  21   2                     UpFlag = 1;
+  22   2                     DownFlag = 0;
+  23   2                     UpCnts = 0;
+  24   2                     DownCnts = 0;
+  25   2             }
+  26   1             else
+  27   1             {
+  28   2                     P0 &= 0Xf9;
+  29   2                     P0 |= 1 << 2;
+  30   2                     UpFlag = 0;
+  31   2                     DownFlag = 1;
+  32   2                     UpCnts = 0;
+  33   2                     DownCnts = 0;
+  34   2             }
+  35   1      }
+  36          
+  37          void Motro_Interrupt_Handle(void)
+  38          {
+  39   1            if(UpFlag){
+  40   2               UpCnts ++;
+  41   2               if(UpCnts > 12000){
+  42   3                      UpCnts = 0;
+  43   3                      DownCnts = 0;
+  44   3                     P0 &= 0Xf9;
+  45   3                      UpFlag = 0;
+  46   3                      DownFlag = 0;
+  47   3                     }
+  48   2               }
+  49   1           if(DownFlag){
+  50   2              DownCnts ++;
+  51   2              if(DownCnts > 12000){
+  52   3                    UpCnts = 0;
+  53   3                     DownCnts = 0;
+  54   3                    P0 &= 0Xf9;
+C51 COMPILER V9.59.0.0   BSP_MOTRO                                                         05/07/2019 13:50:35 PAGE 2   
+
+  55   3                    UpFlag = 0;
+  56   3                     DownFlag = 0;
+  57   3                    }
+  58   2              }
+  59   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    127    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

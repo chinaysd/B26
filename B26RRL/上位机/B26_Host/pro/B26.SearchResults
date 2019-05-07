@@ -1,0 +1,4 @@
+---- Led1_OpenData Matches (3 in 2 files) ----
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):		if((SendBackData == Led1_OpenData)||(SendBackData == Led1_CloseData))
+bsp_key.c (C:\Users\Administrator\Desktop\B26\bsp):				SendBackData = Led1_OpenData;
+bsp_key.h (C:\Users\Administrator\Desktop\B26\bsp):#define       Led1_OpenData       0x0C

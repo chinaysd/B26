@@ -1,0 +1,59 @@
+C51 COMPILER V9.59.0.0   SYSTEM                                                            05/07/2019 13:50:34 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SYSTEM
+OBJECT MODULE PLACED IN .\Objects\system.obj
+COMPILER INVOKED BY: E:\MDK\C51\BIN\C51.EXE ..\user\system.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\bsp;..\lib;..\TimeOut;..
+                    -\user) DEBUG OBJECTEXTEND PRINT(.\Listings\system.lst) TABS(7) OBJECT(.\Objects\system.obj)
+
+line level    source
+
+   1          #include "system.h"
+   2          
+   3          extern unsigned char SendBackData;
+   4          TIMEOUT_PARA TimeOut_Para[2];
+   5          
+   6          
+   7          void System_Init(void)
+   8          {
+   9   1             Key_Init();
+  10   1             TimeOutDet_Init();
+  11   1             Pwm_Init();
+  12   1             Pwm15_Level();
+  13   1             Motro_Init();
+  14   1             Led_Init();
+  15   1             Lock_Init();
+  16   1             Timer_Init();
+  17   1             Key_Register(Key_Function);
+  18   1             Wdt_Init();
+  19   1             Uart_Init(2,9600);
+  20   1      }
+  21          
+  22          void System_Handle(void)
+  23          {
+  24   1             Wdt_Feed();
+  25   1             Key_Poll();
+  26   1             if(TimeOutDet_Check(&TimeOut_Para[0]))
+  27   1             {
+  28   2                    TimeOut_Record(&TimeOut_Para[0],700);//45ms
+  29   2                    Protocol_Send(0xfa,0xfb,SendBackData);
+  30   2             }
+  31   1      }
+  32          
+  33          
+  34          
+  35          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
